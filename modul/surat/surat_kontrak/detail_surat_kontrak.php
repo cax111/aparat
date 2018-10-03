@@ -395,14 +395,21 @@
     <a href="index.php?page=surat_kontrak&act=hapus_surat_kontrak&id=<?php echo $t['id_surat'] ?>" class="btn btn-sm btn-danger btn-flat pull-left margin"> Hapus Surat</a>
     <?php
       $i=0;
+      $tampilpt=$surat_pt->tampilPT("WHERE id_surat=$_GET[id]");
+      
       $tampil=$barang->banyakBarang(" INNER JOIN spk ON spk.id_barang=barang.id_barang INNER JOIN pagu ON pagu.id_barang=barang.id_barang INNER JOIN penawaran ON penawaran.id_barang=barang.id_barang WHERE id_surat=$_GET[id] ");
       foreach($tampil AS $bb){
         $banyak_barang = $bb['hitung'];
       }
       
       if($banyak_barang==0){
-        echo "<button class='btn btn-sm alert-danger btn-flat pull-right margin'>`  Silakan isi dulu barang yang akan dijual, untuk mendownload dokumennya.</button>";
+        echo "<button class='btn btn-sm alert-danger btn-flat pull-right margin' disabled>  Silakan isi dulu barang yang akan dijual, untuk mendownload dokumennya.</button>";
+      }elseif(empty($tampilpt)){
+        echo "<button class='btn btn-sm alert-danger btn-flat pull-right margin' disabled>  Silakan isi dulu nomor ph pada laman surat perusahaan, untuk mendownload dokumennya.</button>";
       }else{
+        foreach($tampilpt AS $pt){
+          $nomor_ph=$pt['nomor_ph'];
+        }
         $tampil=$barang->tampilBarang(" INNER JOIN spk ON spk.id_barang=barang.id_barang INNER JOIN pagu ON pagu.id_barang=barang.id_barang INNER JOIN penawaran ON penawaran.id_barang=barang.id_barang WHERE id_surat=$_GET[id] ");
         foreach($tampil AS $tb){
           $nama_barang[$i] = $tb['nama_barang'];
@@ -450,6 +457,7 @@
         <input type="hidden" name="direktur_perusahaan" value="<?php echo $t['nama_user'] ?>">
         <input type="hidden" name="npwp_perusahaan" value="<?php echo $t['npwp'] ?>">
         <!-- data persurat -->
+        <input type="hidden" name="nomor_ph" value="<?php echo $nomor_ph ?>">
         <input type="hidden" name="nomor_oe" value="<?php echo $t['nomor_oe'] ?>">
         <input type="hidden" name="tanggal_oe" value="<?php echo $t['tanggal_oe'] ?>">
         <input type="hidden" name="nomor_pph" value="<?php echo $t['nomor_pph'] ?>">
@@ -535,4 +543,4 @@ $(document).ready(function(){
     $("#form").slideDown(1000);  
 });
 </script>
-<!-- end animasi form
+<!-- end animasi form -->

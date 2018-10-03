@@ -54,6 +54,7 @@ $nomor_sp = $_POST['nomor_sp'];
 $nomor_bapb = $_POST['nomor_bapb'];
 $nomor_bastb = $_POST['nomor_bastb'];
 $nomor_bap = $_POST['nomor_bap'];
+$nomor_ph = $_POST['nomor_ph'];
 //end variabel persurat
 for($i=0;$i<6;$i++){
 	$nama_panitia[$i]=$_POST['nama_panitia'.$i];

@@ -1,6 +1,6 @@
 <div class="box box-success" id="form" style="display:none">
   <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-envelope"></i>Detail Surat Perusahaan</h3>
+    <h3 class="box-title"> <i class="fa fa-envelope"></i> Detail Surat Lain-lain</h3>
   </div>
   <!-- /.box-header -->
   <div class="box-body">
@@ -133,7 +133,7 @@
                     </tr>"; 
               }
             ?>
-          </tr> -->
+          </tr>
         </tbody>
       </table>
     </div>
@@ -185,8 +185,8 @@
     ?>
       <form method="POST" action="modul/surat/download_surat_lain.php">
         <p class="pull-right margin">Data Yang ingin didownload :
-        <select class="margin" name="tipe_download">
-          <option selected  disabled value="kak">Pilih data surat </option>
+        <select required="required" class="margin" name="tipe_download">
+          <option selected  disabled value="">Pilih data surat </option>
           <option value="kak">Kerangka Acuan Kerja(KAK)</option>
           <option value="form_kualifikasi">Form Kualifikasi</option>
           <option value="uraian_tanggal_kegiatan">Uraian Tanggal Kegiatan</option>
@@ -295,4 +295,4 @@ $(document).ready(function(){
     $("#form").slideDown(1000);  
 });
 </script>
-<!-- end animasi form
+<!-- end animasi form -->

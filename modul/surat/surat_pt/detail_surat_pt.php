@@ -1,9 +1,8 @@
 <div class="box box-success" id="form" style="display:none">
   <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-envelope"></i>Detail Surat Perusahaan</h3>
+    <h3 class="box-title"> <i class="fa fa-envelope"></i> Detail Surat Perusahaan</h3>
   </div>
-  <!-- /.box-header -->
-  <div class="box-body">
+  <!-- /.box-header -->  <div class="box-body">
     <div class="table-responsive">
       <table class="table no-margin">
         <thead>
@@ -133,7 +132,7 @@
                     </tr>"; 
               }
             ?>
-          </tr> -->
+          </tr> 
         </tbody>
       </table>
     </div>

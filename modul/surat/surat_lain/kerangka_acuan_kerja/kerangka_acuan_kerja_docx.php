@@ -103,7 +103,13 @@ $section->addText("Pembangunan sarana dan prasarana diperlukan dalam menunjang s
 $section->addListItem('MAKSUD', 0, $boldFontStyleName,'multilevel');
 $section->addListItem('TUJUAN', 0, $boldFontStyleName,'multilevel');
 $section->addListItem('SASARAN, LOKASI, SUMBER DANA DAN RUANG LINGKUP PEKERJAAN', 0, $boldFontStyleName,'multilevel');
+$section->addListItem('NAMA DAN ORGANISASI KUASA PENGGUNA ANGGARAN', 0, $boldFontStyleName,'multilevel');
+$section->addText("Jurusan $nama_jurusan Fakultas $nama_fakultas Pejabat Pembuat Komitmen pada UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
 
+$section->addListItem('JANGKA WAKTU PENYELESAIAN', 0, $boldFontStyleName,'multilevel');
+$section->addListItem('SPESIFIKASI TEKNIS', 0, $boldFontStyleName,'multilevel');
+$section->addListItem('PENUTUP', 0, $boldFontStyleName,'multilevel');
+$section->addText("Demikian Kerangka Acuan Kerja ini disusun sebagai landasan dalam $judul jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
 //endlist
 
 
