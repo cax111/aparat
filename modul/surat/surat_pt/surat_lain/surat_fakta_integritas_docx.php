@@ -1,7 +1,7 @@
 <?php
 // New portrait section
 $section = $phpWord->addSection(
-    array('paperSize' => 'Folio', 'marginLeft' => 710, 'marginRight' => 1060, 'marginTop' =>3120, 'marginBottom' => 710)
+    array('paperSize' => 'Folio', 'marginLeft' => 1060, 'marginRight' => 1060, 'marginTop' =>3120, 'marginBottom' => 710)
 );
 //set font
 $boldJudulFontStyleName = 'BoldJudulTextPH'; //bold
@@ -36,9 +36,7 @@ $section->addText("Nama\t\t\t : $direktur_perusahaan", $fontStyleName, $isiParag
 $section->addText("Jabatan\t\t : Direktur", $fontStyleName, $isiParagrafStyle);
 $section->addText("Bertindak untuk dan ", $fontStyleName, $isiParagrafStyle);
 $section->addText("atas nama\t\t : $nama_perusahaan", $fontStyleName, $isiParagrafStyle);
-$section->addText("alamat\t\t\t : $alamat_perusahaan", $fontStyleName, $isiParagrafStyle);
-$section->addText("Telp/Fax\t\t : $telp_perusahaan", $fontStyleName, $isiParagrafStyle);
-$section->addText("E-mail\t\t\t : $email_perusahaan", $fontStyleName, $isiParagrafStyle);
+$section->addText("Alamat\t\t\t : $alamat_perusahaan", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 
 //isi word

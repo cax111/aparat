@@ -16,6 +16,8 @@ $IFontStyleName = 'ITextPH';//italic
 $phpWord->addFontStyle($IFontStyleName, array('name' => 'Times New Roman','size' => 12,'italic' => true));
 $UIFontStyleName = 'UITextPH';//Underline italic
 $phpWord->addFontStyle($UIFontStyleName, array('name' => 'Times New Roman','size' => 30,'italic' => true,'underline' => 'single'));
+$STFontStyleName = 'STTextPH';//Spesifikasi Teknis
+$phpWord->addFontStyle($STFontStyleName, array('name' => 'Times New Roman','size' => 8));
 
 //set paragraf
 $judulParagrafStyle = 'judulStylePH';
@@ -58,4 +60,19 @@ for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
     $table->addCell(null)->addText("Unit", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 }
 //end tabel
+
+//list
+$phpWord->addNumberingStyle(
+            	'multilevel1',
+            	array('type' => 'multilevel', 'levels' => array(
+                    array('format' => 'decimal', 'text' => '%1.', 'left' => 360, 'hanging' => 360, 'tabPos' => 360)                    
+                	)
+            	)
+        	);
+for($i=0;$i<$_POST['banyak_barang'];$i++){
+	$section->addListItem("$nama_barang[$i]", 0, $STFontStyleName,'multilevel1');
+	$section->addText("Spesifikasi : $spesifikasi[$i]",$STFontStyleName,$isiParagrafStyle);
+	$section->addText("Sumber : ".htmlspecialchars($link[$i]),$STFontStyleName,$isiParagrafStyle);
+	$section->addImage("../../dist/img/".$gambar[$i], array('width'=>300,'height'=>200));
+}
 ?>

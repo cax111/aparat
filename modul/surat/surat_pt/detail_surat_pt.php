@@ -76,8 +76,8 @@
                     $no_ph=$tp['nomor_ph'];
                     echo"<td><div  class='margin'> : <i class='fa fa-check'></i> Sudah Ada Surat</div></td>                      
                     <td>
-                      <a href='index.php?pageParent=surat_pt&page=surat_ph&act=detail_surat_oe&id=$_GET[id]' class='btn btn-sm btn-info btn-flat pull-left margin'>Detail Data Surat</a>
-                      <a href='index.php?pageParent=surat_pt&page=surat_ph&act=edit_surat_oe&id=$_GET[id]' class='btn btn-sm btn-warning btn-flat pull-left margin'>Ubah Data Surat</a>
+                      <a href='index.php?pageParent=surat_pt&page=surat_ph&act=detail_surat_ph&id=$_GET[id]' class='btn btn-sm btn-info btn-flat pull-left margin'>Detail Data Surat</a>
+                      <a href='index.php?pageParent=surat_pt&page=surat_ph&act=edit_surat_ph&id=$_GET[id]' class='btn btn-sm btn-warning btn-flat pull-left margin'>Ubah Data Surat</a>
                     </td>";
                   }
                 }
@@ -103,7 +103,7 @@
                           </td>
                           <td><div class='margin'><i class='fa fa-times'></i> Data Belum Diisi</div></td>                      
                           <td>
-                            <a href='index.php?page=surat_st&pageParent=surat_pt&page=surat_st&act=insert_surat_st&id_surat=$_GET[id]&id_barang=$tb[id_barang]' class='btn btn-sm btn-success btn-flat pull-left margin'>Isi data Surat</a>
+                            <a href='index.php?page=surat_pt&act=insert_gambar_pt&id_surat=$_GET[id]&id_barang=$tb[id_barang]' class='btn btn-sm btn-success btn-flat pull-left margin'>Isi data Surat</a>
                           </td>
                           </tr>"; 
 
@@ -114,8 +114,8 @@
                           </td>
                           <td><div class='margin'><i class='fa fa-check'></i> Sudah Ada Surat</div></td>                      
                           <td>
-                            <a href='index.php?pageParent=surat_pt&page=surat_oe&act=detail_surat_oe&id=$_GET[id]' class='btn btn-sm btn-info btn-flat pull-left margin'>Detail Data Surat</a>
-                            <a href='index.php?pageParent=surat_pt&page=surat_oe&act=edit_surat_oe&id=$_GET[id]' class='btn btn-sm btn-warning btn-flat pull-left margin'>Ubah Data Surat</a>
+                            <a href='index.php?page=surat_pt&act=detail_gambar_pt&id_surat=$_GET[id]&id_barang=$tb[id_barang]' class='btn btn-sm btn-info btn-flat pull-left margin'>Detail Gambar Barang</a>
+                            <a href='index.php?page=surat_pt&act=edit_gambar_pt&id_surat=$_GET[id]&id_barang=$tb[id_barang]' class='btn btn-sm btn-warning btn-flat pull-left margin'>Ubah Gambar Barang</a>
                           </td>
                         </tr>";
                   }
@@ -140,8 +140,6 @@
   </div>
   <!-- /.box-body -->
   <div class="box-footer clearfix">
-    <a href="index.php?page=surat_kontrak&act=edit_surat_kontrak&id=<?php echo $t['id_surat'] ?>" class="btn btn-sm btn-warning btn-flat pull-left margin">Ubah Data Surat Kontrak </a>
-    <a href="index.php?page=surat_kontrak&act=hapus_surat_kontrak&id=<?php echo $t['id_surat'] ?>" class="btn btn-sm btn-danger btn-flat pull-left margin"> Hapus Surat</a>
     <?php
       $i=0;
       $tampil=$barang->banyakBarang(" INNER JOIN spk ON spk.id_barang=barang.id_barang INNER JOIN pagu ON pagu.id_barang=barang.id_barang INNER JOIN penawaran ON penawaran.id_barang=barang.id_barang WHERE id_surat=$_GET[id] ");
@@ -158,6 +156,8 @@
           $spesifikasi[$i] = $tb['spesifikasi'];
           $volume[$i] = $tb['volume'];
           $satuan[$i] = $tb['satuan'];
+          $gambar[$i] = $tb['gambar'];
+          $link[$i] = $tb['link'];
           $harga_dasar_hps[$i] =$tb['harga_dasar'];
           $harga_dasar_penawaran[$i] =$tb['harga_dasar_penawaran'];
           $harga_dasar_spk[$i] =$tb['harga_dasar_spk'];
@@ -198,6 +198,8 @@
         <input type="hidden" name="alamat_perusahaan" value="<?php echo $t['alamat_perusahaan'] ?>">
         <input type="hidden" name="direktur_perusahaan" value="<?php echo $t['nama_user'] ?>">
         <input type="hidden" name="npwp_perusahaan" value="<?php echo $t['npwp'] ?>">
+        <input type="hidden" name="telp_perusahaan" value="<?php echo $t['no_telp'] ?>">
+        <input type="hidden" name="email_perusahaan" value="<?php echo $t['email'] ?>">
         <!-- data persurat -->
         <input type="hidden" name="nomor_ph" value="<?php echo $no_ph ?>">
         <input type="hidden" name="tanggal_pph" value="<?php echo $t['tanggal_pph'] ?>">
@@ -206,11 +208,14 @@
         <input type="hidden" name="banyak_barang" value="<?php echo $banyak_barang ?>">
         <!-- harga Barang HPS - PENAWARAN - SPK -->
         <?php
+          $bbarang=null;
           for($i=0;$i<$banyak_barang;$i++){
             echo "<input type='hidden' name='nama_barang"."$i' value='$nama_barang[$i]'>";
             echo "<input type='hidden' name='spesifikasi"."$i' value='$spesifikasi[$i]'>";
             echo "<input type='hidden' name='volume"."$i' value='$volume[$i]'>";
             echo "<input type='hidden' name='satuan"."$i' value='$satuan[$i]'>";
+            echo "<input type='hidden' name='gambar"."$i' value='$gambar[$i]'>";
+            echo "<input type='hidden' name='link"."$i' value='$link[$i]'>";
             echo "<input type='hidden' name='harga_dasar_hps"."$i' value='$harga_dasar_hps[$i]'>";
             echo "<input type='hidden' name='harga_dasar_penawaran"."$i' value='$harga_dasar_penawaran[$i]'>";
             echo "<input type='hidden' name='harga_dasar_spk"."$i' value='$harga_dasar_spk[$i]'>";
@@ -229,6 +234,7 @@
             echo "<input type='hidden' name='total_harga_hps"."$i' value='$total_harga_hps[$i]'>";
             echo "<input type='hidden' name='total_harga_penawaran"."$i' value='$total_harga_penawaran[$i]'>";
             echo "<input type='hidden' name='total_harga_spk"."$i' value='$total_harga_spk[$i]'>";
+            $bbarang = $bbarang.$gambar[$i];
           }
           for($i=0;$i<6;$i++){
             echo "<input type='hidden' name='nama_panitia"."$i' value='$nama_panitia[$i]'>";
@@ -236,14 +242,18 @@
           for($i=0;$i<6;$i++){
             echo "<input type='hidden' name='jabatan_panitia"."$i' value='$jabatan_panitia[$i]'>";
           }
-          if(!empty($no_ph)){
+          if(empty($no_ph)){
         ?>
-        <input type="hidden" name="tipe_download" value="kontrak">
-        <button name="oke" class="btn btn-sm btn-success btn-flat pull-left margin"> Download Surat Perusahaan</button>
+            <button name='oke' disabled class='btn btn-sm btn-danger btn-flat pull-left margin'> Silakan isi dulu nomor surat penawaran harga</button>
       </form>
     <?php
+          }elseif(empty($bbarang)){ 
+           echo "<button name='oke' disabled class='btn btn-sm btn-danger btn-flat pull-left margin'> Silakan isi dulu gambar dan link tiap barang</button>";
           }else{
-            echo "<button name='oke' disabled class='btn btn-sm btn-danger btn-flat pull-left margin'> Silakan isi dulu nomor surat penawaran harga</button>";
+    ?>
+            <input type="hidden" name="tipe_download" value="kontrak">
+            <button name="oke" class="btn btn-sm btn-success btn-flat pull-left margin"> Download Surat Perusahaan</button>
+    <?php
           }
         }   
       }

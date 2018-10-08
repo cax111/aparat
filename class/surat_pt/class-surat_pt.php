@@ -26,5 +26,19 @@
 				return "Input Data Berhasil.";
 			}
 		}
+
+		function editPH($nomor,$id_surat){
+			$insert=parent::koneksi()->prepare("UPDATE surat_pt SET nomor_ph=? WHERE id_surat=?");
+			$insert->BindParam(1,$nomor);
+			$insert->BindParam(2,$id_surat);
+			$insert->execute();
+
+			if($insert->rowCount()==0){
+			   return "Input Data Gagal.";
+			}else{
+				echo"berhasil";
+				return "Input Data Berhasil.";
+			}
+		}
 	}
 ?>

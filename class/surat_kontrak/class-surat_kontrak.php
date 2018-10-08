@@ -138,5 +138,55 @@
 				}
 			}
 		}
+
+		function ubahKontrak($judul,$id_jurusan,$id_user,$tahun_surat,$nama_ppk,$nip_ppk,$nama_ppb,$nip_ppb,$kpph,$spph,$apph,$pphp1,$pphp2,$pphp3,$id,$id_panitia){
+			$update1=parent::koneksi()->prepare("UPDATE surat_kontrak SET judul_surat=?, id_jurusan=?, id_user=?, tahun_surat=?, nama_ppk=?, nip_ppk=?, nama_ppb=?, nip_ppb=? WHERE id_surat=?");
+			$update1->BindParam(1,$judul);
+			$update1->BindParam(2,$id_jurusan);
+			$update1->BindParam(3,$id_user);
+			$update1->BindParam(4,$tahun_surat);
+			$update1->BindParam(5,$nama_ppk);
+			$update1->BindParam(6,$nip_ppk);
+			$update1->BindParam(7,$nama_ppb);
+			$update1->BindParam(8,$nip_ppb);
+			$update1->BindParam(9,$id);
+			$update1->execute();
+
+			$update2=parent::koneksi()->prepare("UPDATE panitia_pengawas SET nama_panitia=? WHERE id_panitia=?");
+			$update2->BindParam(1,$kpph);
+			$update2->BindParam(2,$id_panitia[0]);
+			$update2->execute();
+
+			$update2=parent::koneksi()->prepare("UPDATE panitia_pengawas SET nama_panitia=? WHERE id_panitia=?");
+			$update2->BindParam(1,$spph);
+			$update2->BindParam(2,$id_panitia[1]);
+			$update2->execute();   
+
+			$update2=parent::koneksi()->prepare("UPDATE panitia_pengawas SET nama_panitia=? WHERE id_panitia=?");
+			$update2->BindParam(1,$apph);
+			$update2->BindParam(2,$id_panitia[2]);
+			$update2->execute();
+
+			$update2=parent::koneksi()->prepare("UPDATE panitia_pengawas SET nama_panitia=? WHERE id_panitia=?");
+			$update2->BindParam(1,$pphp1);
+			$update2->BindParam(2,$id_panitia[3]);
+			$update2->execute();   
+
+			$update2=parent::koneksi()->prepare("UPDATE panitia_pengawas SET nama_panitia=? WHERE id_panitia=?");
+			$update2->BindParam(1,$pphp2);
+			$update2->BindParam(2,$id_panitia[4]);
+			$update2->execute();
+
+			$update2=parent::koneksi()->prepare("UPDATE panitia_pengawas SET nama_panitia=? WHERE id_panitia=?");
+			$update2->BindParam(1,$pphp3);
+			$update2->BindParam(2,$id_panitia[5]);
+			$update2->execute();
+
+			if($update1->rowCount()==0&&$update2->rowCount()==0){
+				return "Ubah Data Gagal.";
+			}else{
+				return "Ubah Data Berhasil.";
+			}
+		}
 	}
 ?>

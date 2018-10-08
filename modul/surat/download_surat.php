@@ -24,6 +24,8 @@ $nama_perusahaan=$_POST['nama_perusahaan'];
 $alamat_perusahaan=$_POST['alamat_perusahaan'];
 $direktur_perusahaan=$_POST['direktur_perusahaan'];
 $npwp_perusahaan=$_POST['npwp_perusahaan'];
+$telp_perusahaan=$_POST['telp_perusahaan'];
+$email_perusahaan=$_POST['email_perusahaan'];
 //start variabel persurat
 $nomor_oe = $_POST['nomor_oe'];
 $tanggal_oe=$pengaturan->formatTanggal($_POST['tanggal_oe']);

@@ -35,8 +35,16 @@
                     <td><?php echo ": ".$t['alamat_perusahaan']; ?></td>
                   </tr> 
                   <tr>
-                    <th>Alamat Perusahaan</th>
+                    <th>NPWP Perusahaan</th>
                     <td><?php echo ": ".$t['npwp']; ?></td>
+                  </tr> 
+                  <tr>
+                    <th>No. Telpon Perusahaan</th>
+                    <td><?php echo ": ".$t['no_telp']; ?></td>
+                  </tr> 
+                  <tr>
+                    <th>Email Perusahaan</th>
+                    <td><?php echo ": ".$t['email']; ?></td>
                   </tr> 
                   </tbody>
                 </table>

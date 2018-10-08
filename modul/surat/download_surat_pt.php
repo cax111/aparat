@@ -24,6 +24,8 @@ $nama_perusahaan=$_POST['nama_perusahaan'];
 $alamat_perusahaan=$_POST['alamat_perusahaan'];
 $direktur_perusahaan=$_POST['direktur_perusahaan'];
 $npwp_perusahaan=$_POST['npwp_perusahaan'];
+$telp_perusahaan=$_POST['telp_perusahaan'];
+$email_perusahaan=$_POST['email_perusahaan'];
 //start variabel persurat
 $nomor_ph=$_POST['nomor_ph'];
 $tanggal_pph=$pengaturan->formatTanggal($_POST['tanggal_pph']);
@@ -41,6 +43,8 @@ for($i=0;$i<$_POST['banyak_barang'];$i++){
 	echo $nama_barang[$i]=$_POST['nama_barang'.$i];
 	echo $volume[$i]=$_POST['volume'.$i];
 	echo $satuan[$i]=$_POST['satuan'.$i];
+	echo $gambar[$i]=$_POST['gambar'.$i];
+	echo $link[$i]=$_POST['link'.$i];
 	echo $spesifikasi[$i]=$_POST['spesifikasi'.$i];
 	echo $harga_dasar_hps[$i]=$_POST['harga_dasar_hps'.$i];
 	echo $harga_dasar_penawaran[$i]=$_POST['harga_dasar_penawaran'.$i];

@@ -16,7 +16,7 @@
 
       <h3 class="box-title">Ubah Data Umum Surat Kontrak</h3> 
       <h5>Judul Surat</h5>
-      <input class="form-control" type="text" name="judul_surat" value="<?=$t['judul_surat']?>" required="required" >
+      <input class="form-control" type="text" name="judul" value="<?=$t['judul_surat']?>" required="required" >
       <h5>Universitas</h5>
       <input class="form-control" type="text" name="nama_universitas" disabled value="Universitas Islam Sunan Gunung Djati Bandung" required="required" >
       <h5>Fakultas</h5>
@@ -61,9 +61,28 @@
       <input class="form-control" type="text" name="nama_ppb" value="<?=$t['nama_ppb']?>" required="required" >
       <h5>NIP Pokja Pengadaan Barang/Jasa</h5>
       <input class="form-control" type="text" name="nip_ppb" value="<?=$t['nip_ppb']?>" required="required" >
+      
+      <?php
+        $tampil = $surat_kontrak->tampilPanitia("WHERE id_surat = '$_GET[id]'");
+        foreach($tampil AS $t){
+          $nama_panitia[]=$t['nama_panitia'];
+          $id_panitia[]=$t['id_panitia'];
+        }
+      ?>
+      <h5>Ketua Panitia Peneliti Harga</h5>
+      <input class="form-control" type="text" name="kpph" value="<?=$nama_panitia['0']?>" required="required" >
+      <h5>Sekretaris Panitia Peneliti Harga</h5>
+      <input class="form-control" type="text" name="spph" value="<?=$nama_panitia['1']?>" required="required" >
+      <h5>Anggota Panitia Peneliti Harga</h5>
+      <input class="form-control" type="text" name="apph" value="<?=$nama_panitia['2']?>" required="required" >
+      <h5>Panitia Peneriama Hasil Pekerjaan 1</h5>
+      <input class="form-control" type="text" name="pphp1" value="<?=$nama_panitia['3']?>" required="required" >
+      <h5>Panitia Peneriama Hasil Pekerjaan 2</h5>
+      <input class="form-control" type="text" name="pphp2" value="<?=$nama_panitia['4']?>" required="required" >
+      <h5>Panitia Peneriama Hasil Pekerjaan 3</h5>
+      <input class="form-control" type="text" name="pphp3" value="<?=$nama_panitia['5']?>" required="required" >
       <br/>
       <br/>
-
       <label class="pull-left">
       <?php
         echo"<a class='btn btn-flat btn-warning' href='index.php?page=surat_kontrak&act=detail_surat_kontrak&id=$_GET[id]'><i class='fa fa-arrow-circle-o-left'> </i> Kembali</a>";
@@ -75,14 +94,31 @@
     <?php
     }
       if(isset($_POST['ok'])){
-        $status = $user->ubahUser($_POST['nama_perusahaan'],$_POST['nama_pemilik'],$_POST['alamat_perusahaan'],$_POST['npwp'],$_GET['id']);      
-        if($status=="Input Data Gagal."){
+        $status = $surat_kontrak->ubahKontrak($_POST['judul'],
+                                              $_POST['jurusan'],
+                                              $_SESSION['id_user_aparat'],
+                                              $_POST['tahun_surat'],
+                                              $_POST['nama_ppk'],
+                                              $_POST['nip_ppk'],
+                                              $_POST['nama_ppb'],
+                                              $_POST['nip_ppb'],
+                                              $_POST['kpph'],
+                                              $_POST['spph'],
+                                              $_POST['apph'],
+                                              $_POST['pphp1'],
+                                              $_POST['pphp2'],
+                                              $_POST['pphp3'],
+                                              $_GET['id'],
+                                              $id_panitia);      
+        if($status=="Ubah Data Gagal."){
     ?>
           <div class="box-footer clearfix label-danger">
             <i class="fa fa-times"></i>
             <?= $status ?>
           </div> 
     <?php 
+        }else{
+          header("location:index.php?page=surat_kontrak&act=edit_surat_kontrak&id=$_GET[id]");
         }
       }
     ?>         
