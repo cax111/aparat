@@ -86,8 +86,8 @@
                           </td>
                           <td><div class='margin'><i class='fa fa-check'></i> Sudah Ada Surat</div></td>                      
                           <td>
-                            <a href='index.php?pageParent=surat_pt&page=surat_oe&act=detail_surat_oe&id=$_GET[id]' class='btn btn-sm btn-info btn-flat pull-left margin'>Detail Data Surat</a>
-                            <a href='index.php?pageParent=surat_pt&page=surat_oe&act=edit_surat_oe&id=$_GET[id]' class='btn btn-sm btn-warning btn-flat pull-left margin'>Ubah Data Surat</a>
+                            <a href='index.php?page=surat_lain&act=detail_gambar_lain&id_surat=$_GET[id]&id_barang=$tb[id_barang]' class='btn btn-sm btn-info btn-flat pull-left margin'>Detail Data Surat</a>
+                            <a href='index.php?page=surat_lain&act=edit_gambar_lain&id_surat=$_GET[id]&id_barang=$tb[id_barang]' class='btn btn-sm btn-warning btn-flat pull-left margin'>Ubah Data Surat</a>
                           </td>
                         </tr>";
                   }

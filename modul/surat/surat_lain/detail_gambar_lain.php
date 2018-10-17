@@ -38,7 +38,7 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
                   <div class="pull-right">
-                        <a href="index.php?page=surat_pt&act=detail_surat_pt&id=<?=$_GET['id_surat']?>" class="btn btn-sm btn-success btn-flat"><span class=""></span>Kembali</a>
+                        <a href="index.php?page=surat_lain&act=detail_surat_lain&id=<?=$_GET['id_surat']?>" class="btn btn-sm btn-success btn-flat"><span class=""></span>Kembali</a>
                   </div>
             </div>
             <!-- /.box-footer -->
