@@ -21,7 +21,11 @@ $phpWord->addParagraphStyle($listTTDBAPPH, array('alignment' => \PhpOffice\PhpWo
 
 $section->addText("SURAT PESANAN (SP)", $JudulFontStyleName, $judulParagrafStyle);
 $section->addText("Nomor : ".$nomor_sp, $fontStyleName, $judulParagrafStyle);
-$section->addText("Paket Pekerjaan : $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun", $fontStyleName, $judulParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("Paket Pekerjaan : $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun", $fontStyleName, $judulParagrafStyle);
+}else{
+    $section->addText("Paket Pekerjaan : $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun", $fontStyleName, $judulParagrafStyle);   
+}
 $section->addText("", $boldFontStyleName, $isiParagrafStyle2);
 $section->addText("Yang bertanda tangan di bawah ini :", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
@@ -30,7 +34,11 @@ $section->addText("Jabatan\t\t: Pejabat Pembuat Komitmen", $fontStyleName, $isiP
 $section->addText("Alamat\t\t: $alamat_universitas", $fontStyleName, $isiParagrafStyle2);
 $section->addText("selanjutnya disebut sebagai Pejabat Pembuat Komitmen;", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("Berdasarkan Surat Perintah kerja (SPK) Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun nomor: $nomor_spk tanggal ".$pengaturan->formatTanggal($tanggal_spk).", bersama ini memerintahkan :", $fontStyleName, $isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("Berdasarkan Surat Perintah kerja (SPK) Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun nomor: $nomor_spk tanggal ".$pengaturan->formatTanggal($tanggal_spk).", bersama ini memerintahkan :", $fontStyleName, $isiParagrafStyle2);
+}else{
+    $section->addText("Berdasarkan Surat Perintah kerja (SPK) Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun nomor: $nomor_spk tanggal ".$pengaturan->formatTanggal($tanggal_spk).", bersama ini memerintahkan :", $fontStyleName, $isiParagrafStyle2);
+}
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Nama CV\t: $nama_perusahaan", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Alamat CV\t: $alamat_perusahaan", $fontStyleName, $isiParagrafStyle2);
@@ -64,7 +72,7 @@ $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirst
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow(400);
 $table->addCell(1000,$VAlignCellStyle)->addText('No',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(6000,$VAlignCellStyle)->addText('Nama Barang',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+$table->addCell(4000,$VAlignCellStyle)->addText('Nama Barang',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(1000,$VAlignCellStyle)->addText('Vol',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(null,$VAlignCellStyle)->addText('Satuan',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(null,$VAlignCellStyle)->addText('Harga Satuan',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));

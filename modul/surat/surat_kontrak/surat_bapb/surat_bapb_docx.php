@@ -10,6 +10,8 @@ $JudulFontStyleName = 'JudulBAPB'; //bold
 $phpWord->addFontStyle($JudulFontStyleName, array('name' => 'Times New Roman','size' => 11));
 $fontStyleName = 'normalBAPB'; //normal
 $phpWord->addFontStyle($fontStyleName, array('name' => 'Times New Roman','size' => 10));
+$IFontStyleName = 'italicBAPB'; //italic
+$phpWord->addFontStyle($IFontStyleName, array('name' => 'Times New Roman','size' => 10, 'italic' => true));
 $boldFontStyleName = 'boldBAPB'; //bold
 $phpWord->addFontStyle($boldFontStyleName, array('name' => 'Times New Roman','size' => 10,'bold' => true));
 
@@ -50,29 +52,38 @@ $phpWord->addNumberingStyle(
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$pphp = $table->addCell(3000, $VAlignCellStyleTop);
+$pphp = $table->addCell(null, $VAlignCellStyleTop);
 for($i=3;$i<6;$i++){
-    $pphp->addListItem("$nama_panitia[$i]", 0, $fontStyleName,'pphp', $isiParagrafStyle2);
+    $pphp->addListItem("$nama_panitia[$i] ", 0, $fontStyleName,'pphp', $isiParagrafStyle2);
 }
 $samaDengan = $table->addCell(100, $VAlignCellStyleTop);
 for($i=3;$i<6;$i++){
-    $samaDengan->addText(":", $fontStyle,array('spaceAfter' => 0));
+    $samaDengan->addText(" : ", $fontStyle,array('spaceAfter' => 0));
 }
 $pphp = $table->addCell(null, $VAlignCellStyleTop);
 for($i=3;$i<6;$i++){
-    $pphp->addText("$jabatan_panitia[$i]", $fontStyle,array('spaceAfter' => 0));
+    $pphp->addText("Panitia Penerima Hasil Kerja", $fontStyleName,array('spaceAfter' => 0));
 }
 //end tabel
+if($nama_fakultas=="lain-lain"){
+    $section->addText("",null,$isiParagrafStyle2);
+    $section->addText("telah melaksanakan pemeriksaan hasil Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun berdasarkan Surat Perintah Kerja (Kontrak), Nomor: ".$nomor_spk.".",$fontStyleName,$isiParagrafStyle2);
+    $section->addText("",null,$isiParagrafStyle2);
 
-$section->addText("",null,$isiParagrafStyle2);
-$section->addText("telah melaksanakan pemeriksaan hasil Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun berdasarkan Surat Perintah Kerja (Kontrak), Nomor: 0249/Un.05/III.7/KS.01.7/02/2018.",$fontStyleName,$isiParagrafStyle2);
-$section->addText("",null,$isiParagrafStyle2);
+    $section->addText("HASIL PEMERIKSAAN ADALAH SEBAGAI BERIKUT", $boldFontStyleName, $judulParagrafStyle);
+    $section->addText("",null,$isiParagrafStyle2);
+    $section->addText("Hasil Pekerjaan $judul, telah selesai dilaksanakan dalam keadaan 100% baru, kondisi baik dan cukup memuaskan oleh $nama_perusahaan untuk $nama_jurusan UIN Sunan Gunung Djati Bandung dengan perincian sebagai berikut :",$fontStyleName,$isiParagrafStyle2);
+    $section->addText("",null,$isiParagrafStyle2);
+}else{
+    $section->addText("",null,$isiParagrafStyle2);
+    $section->addText("telah melaksanakan pemeriksaan hasil Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun berdasarkan Surat Perintah Kerja (Kontrak), Nomor: ".$nomor_spk.".",$fontStyleName,$isiParagrafStyle2);
+    $section->addText("",null,$isiParagrafStyle2);
 
-$section->addText("HASIL PEMERIKSAAN ADALAH SEBAGAI BERIKUT", $boldFontStyleName, $judulParagrafStyle);
-$section->addText("",null,$isiParagrafStyle2);
-$section->addText("Hasil Pekerjaan $judul, telah selesai dilaksanakan dalam keadaan 100% baru, kondisi baik dan cukup memuaskan oleh $nama_perusahaan untuk  Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung dengan perincian sebagai berikut :",$fontStyleName,$isiParagrafStyle2);
-$section->addText("",null,$isiParagrafStyle2);
-
+    $section->addText("HASIL PEMERIKSAAN ADALAH SEBAGAI BERIKUT", $boldFontStyleName, $judulParagrafStyle);
+    $section->addText("",null,$isiParagrafStyle2);
+    $section->addText("Hasil Pekerjaan $judul, telah selesai dilaksanakan dalam keadaan 100% baru, kondisi baik dan cukup memuaskan oleh $nama_perusahaan untuk Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung dengan perincian sebagai berikut :",$fontStyleName,$isiParagrafStyle2);
+    $section->addText("",null,$isiParagrafStyle2);
+}
 //tambahkan tabel
 $fancyTableStyleName = 'panitia php';
 $fancyTableStyle = array('borderSize' => 6, 'borderColor' => '000000', 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER, 'cellSpacing' => 50);
@@ -102,7 +113,29 @@ for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
 //end tabel
 
 $section->addText("", $boldFontStyleName, $isiParagrafStyle2);
-$section->addText("Berdasarkan hal-hal tersebut di atas, kami menerima barang-barang tersebut diatas dan kami berpendapat bahwa kepada $nama_perusahaan dapat dibayarkan/dilakukan pembayaran sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)."Rupiah), termasuk pajak sesuai dengan Surat Perintah Kerja (Kontrak).", $fontStyleName, $isiParagrafStyle2);
+$pisahin = "Berdasarkan hal-hal tersebut di atas, kami menerima barang-barang tersebut diatas dan kami berpendapat bahwa kepada $nama_perusahaan dapat dibayarkan/dilakukan pembayaran sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)." Rupiah ), termasuk pajak sesuai dengan Surat Perintah Kerja (Kontrak).";
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(" ", $pisahin);
+$ambil1=null;
+$ambil2=null;
+for($i=0;$i<count($pisah);$i++){
+    if(substr($pisah[$i],0,1)=="("){
+        $ambil1=$i; 
+    }elseif(substr($pisah[$i],0,1)==")"){
+        $ambil2=$i;
+        break;
+    }
+}
+echo $ambil1."\n";
+echo $ambil2;
+    for($i=0;$i<count($pisah);$i++){
+        if($i>=$ambil1 && $i<=$ambil2){
+            $textRun->addText($pisah[$i]." ", $IFontStyleName);
+        }else{
+            $textRun->addText($pisah[$i]." ", $fontStyleName);
+        }
+    }
+
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Demikian berita acara ini kami buat sesuai dengan keadaan yang sebenarnya dan untuk digunakan sebagaimana mestinya.", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);

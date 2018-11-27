@@ -35,7 +35,11 @@ $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 $section->addText("HASIL KLARIFIKASI DAN NEGOSIASI HARGA", $fontStyleName, $isiParagrafStyle);
 $section->addText("PEKERJAAN ".strtoupper($judul), $fontStyleName, $isiParagrafStyle);
-$section->addText("JURUSAN ".strtoupper($nama_jurusan)." FAKULTAS ".strtoupper($nama_fakultas)." UIN SUNAN GUNUNG DJATI BANDUNG", $fontStyleName, $isiParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+    $section->addText(strtoupper($nama_jurusan)." UIN SUNAN GUNUNG DJATI BANDUNG", $fontStyleName, $isiParagrafStyle);
+}else{
+    $section->addText("JURUSAN ".strtoupper($nama_jurusan)." FAKULTAS ".strtoupper($nama_fakultas)." UIN SUNAN GUNUNG DJATI BANDUNG", $fontStyleName, $isiParagrafStyle);   
+}
 $section->addText("TAHUN $tahun", $fontStyleName, $isiParagrafStyle);
 $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 //tambahkan tabel
@@ -79,7 +83,27 @@ $table->addCell(null)->addText($pengaturan->formatUang($total_spk), $fontStyle, 
 
 //end tabel
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("Terbilang: (".$pengaturan->penyebut($total_spk)."Rupiah), termasuk pajak.", $fontStyleName, $isiParagrafStyle);
+$pisahin = "Terbilang: (".$pengaturan->penyebut($total_spk)." Rupiah ), termasuk pajak.";
+$textRun = $section->createTextRun($isiParagrafStyle);
+$pisah = explode(" ", $pisahin);
+$ambil1=null;
+$ambil2=null;
+for($i=0;$i<count($pisah);$i++){
+    if(substr($pisah[$i],0,1)=="("){
+        $ambil1=$i; 
+    }elseif(substr($pisah[$i],0,1)==")"){
+        $ambil2=$i;
+        break;
+    }
+}
+    for($i=0;$i<count($pisah);$i++){
+        if($i>=$ambil1 && $i<=$ambil2){
+            $textRun->addText($pisah[$i]." ", $IFontStyleName);
+        }else{
+            $textRun->addText($pisah[$i]." ", $fontStyleName);
+        }
+    }
+    
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 //tambahkan tabel
@@ -95,7 +119,7 @@ $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirst
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
 $table->addCell(5000, $VAlignCellStyle)->addText(' Pokja Pengadaan Barang/Jasa', $fontStyle,array('spaceAfter' => 0));
-$table->addCell(7000, array('gridSpan' => 2))->addText("\tTim Peneliti Harga,", $fontStyle,array('spaceAfter' => 0));
+$table->addCell(7000, array('gridSpan' => 2))->addText("Tim Peneliti Harga,", $fontStyle,array('spaceAfter' => 0));
 $table->addRow();
 $table->addCell(3000)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 //listnumber---------------------------------------------

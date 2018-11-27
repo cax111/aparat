@@ -34,7 +34,11 @@ $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 $section->addText("PEKERJAAN ".strtoupper($judul), $fontStyleName, $isiParagrafStyle);
-$section->addText("JURUSAN ".strtoupper($nama_jurusan)." FAKULTAS ".strtoupper($nama_fakultas)." UIN SUNAN GUNUNG DJATI BANDUNG TAHUN $tahun", $fontStyleName, $isiParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+    $section->addText(strtoupper($nama_jurusan)." UIN SUNAN GUNUNG DJATI BANDUNG TAHUN $tahun", $fontStyleName, $isiParagrafStyle);
+}else{
+    $section->addText("JURUSAN ".strtoupper($nama_jurusan)." FAKULTAS ".strtoupper($nama_fakultas)." UIN SUNAN GUNUNG DJATI BANDUNG TAHUN $tahun", $fontStyleName, $isiParagrafStyle);
+}
 $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 //tambahkan tabel
 
@@ -73,7 +77,29 @@ $table->addCell(null)->addText($pengaturan->formatUang($total_spk), $fontStyle, 
 
 //end tabel
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("Terbilang: (".$pengaturan->penyebut($total_penawaran)."Rupiah), termasuk pajak.", $fontStyleName, $isiParagrafStyle);
+$section->addText("", $fontStyleName, $isiParagrafStyle);
+$pisahin = "Terbilang: (".$pengaturan->penyebut($total_penawaran)." Rupiah ), termasuk pajak.";
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(" ", $pisahin);
+$ambil1=null;
+$ambil2=null;
+for($i=0;$i<count($pisah);$i++){
+    if(substr($pisah[$i],0,1)=="("){
+        $ambil1=$i; 
+    }elseif(substr($pisah[$i],0,1)==")"){
+        $ambil2=$i;
+        break;
+    }
+}
+echo $ambil1."\n";
+echo $ambil2;
+    for($i=0;$i<count($pisah);$i++){
+        if($i>=$ambil1 && $i<=$ambil2){
+            $textRun->addText($pisah[$i]." ", $IFontStyleName);
+        }else{
+            $textRun->addText($pisah[$i]." ", $fontStyleName);
+        }
+    }
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 

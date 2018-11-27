@@ -24,12 +24,19 @@ $section->addText("\t\t\t\t\t\t\t\t\t$alamat_perusahaan", $boldFontStyleName, $i
 //isi word
 $section->addText("Assalamu'alaikum Wr. Wb.,", $IFontStyleName, $isiParagrafStyle);
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
-$section->addText("\tBerdasarkan Berita Acara Klarifikasi dan Negosiasi Harga Nomor : ".$nomor_baknh.", tanggal ".$pengaturan->formatTanggal($tanggal_pp)." tentang penawaran harga Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun, selanjutnya kami menunjuk $nama_perusahaan yang saudara pimpin untuk melaksanakan pekerjaan sebagaimana dimaksud.", $fontStyleName, $isiParagrafStyle2);
-$section->addText("", $IFontStyleName, $isiParagrafStyle);
-$section->addText("", $IFontStyleName, $isiParagrafStyle);
-$section->addText("\tKeterangan lebih terperinci akan kami jelaskan dalam Surat Perjanjian Kerjasama (Kontrak) pada tanggal ".$tanggal_spk_pp.", bertempat di gedung Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, $alamat_universitas, Pukul $waktu_pp WIB sampai dengan selesai. ", $fontStyleName,$isiParagrafStyle2);
-$section->addText("", $IFontStyleName, $isiParagrafStyle);
-
+if($nama_fakultas=="lain-lain"){
+	$section->addText("\tBerdasarkan Berita Acara Klarifikasi dan Negosiasi Harga Nomor : ".$nomor_baknh.", tanggal ".$pengaturan->formatTanggal($tanggal_pp)." tentang penawaran harga Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun, selanjutnya kami menunjuk $nama_perusahaan yang saudara pimpin untuk melaksanakan pekerjaan sebagaimana dimaksud.", $fontStyleName, $isiParagrafStyle2);
+	$section->addText("", $IFontStyleName, $isiParagrafStyle);
+	$section->addText("", $IFontStyleName, $isiParagrafStyle);
+	$section->addText("\tKeterangan lebih terperinci akan kami jelaskan dalam Surat Perjanjian Kerjasama (Kontrak) pada tanggal ".$pengaturan->formatTanggal($tanggal_spk_pp).", bertempat di gedung $nama_jurusan UIN Sunan Gunung Djati Bandung, $alamat_universitas, Pukul $waktu_pp WIB sampai dengan selesai. ", $fontStyleName,$isiParagrafStyle2);
+	$section->addText("", $IFontStyleName, $isiParagrafStyle);
+}else{
+	$section->addText("\tBerdasarkan Berita Acara Klarifikasi dan Negosiasi Harga Nomor : ".$nomor_baknh.", tanggal ".$pengaturan->formatTanggal($tanggal_pp)." tentang penawaran harga Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun, selanjutnya kami menunjuk $nama_perusahaan yang saudara pimpin untuk melaksanakan pekerjaan sebagaimana dimaksud.", $fontStyleName, $isiParagrafStyle2);
+	$section->addText("", $IFontStyleName, $isiParagrafStyle);
+	$section->addText("", $IFontStyleName, $isiParagrafStyle);
+	$section->addText("\tKeterangan lebih terperinci akan kami jelaskan dalam Surat Perjanjian Kerjasama (Kontrak) pada tanggal ".$pengaturan->formatTanggal($tanggal_spk_pp).", bertempat di gedung Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, $alamat_universitas, Pukul $waktu_pp WIB sampai dengan selesai. ", $fontStyleName,$isiParagrafStyle2);
+	$section->addText("", $IFontStyleName, $isiParagrafStyle);
+}
 $section->addText("Demikian atas perhatian dan kerjasama yang baik, kami haturkan terima kasih.", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
 

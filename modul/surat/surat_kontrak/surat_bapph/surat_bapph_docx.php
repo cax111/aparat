@@ -19,7 +19,11 @@ $section->addText("BERITA ACARA PENELITIAN PENAWARAN HARGA", $boldFontStyleName,
 $section->addText("Nomor : ".$nomor_bapph, $fontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $isiParagrafStyle2);
 $section->addText("", $boldFontStyleName, $isiParagrafStyle2);
-$isi = "Pada hari ini ".$hari_bapph." tanggal".$pengaturan->formatTanggal2($tanggal_bapph).", kami yang bertanda tangan di bawah ini, Tim Peneliti Penawaran Harga Pekerjaan ".$judul." Jurusan ".$nama_jurusan." Fakultas ".$nama_fakultas." UIN Sunan Gunung Djati Bandung tahun ".$tahun.", telah mengadakan penelitian Penawaran Harga yang diajukan oleh perusahaan/rekanan: ".$nama_perusahaan.".";
+if($nama_fakultas=="lain-lain"){
+    $isi = "Pada hari ini ".$hari_bapph." tanggal".$pengaturan->formatTanggal2($tanggal_bapph).", kami yang bertanda tangan di bawah ini, Tim Peneliti Penawaran Harga Pekerjaan ".$judul." ".$nama_jurusan." UIN Sunan Gunung Djati Bandung tahun ".$tahun.", telah mengadakan penelitian Penawaran Harga yang diajukan oleh perusahaan/rekanan: ".$nama_perusahaan.".";
+}else{
+    $isi = "Pada hari ini ".$hari_bapph." tanggal".$pengaturan->formatTanggal2($tanggal_bapph).", kami yang bertanda tangan di bawah ini, Tim Peneliti Penawaran Harga Pekerjaan ".$judul." Jurusan ".$nama_jurusan." Fakultas ".$nama_fakultas." UIN Sunan Gunung Djati Bandung tahun ".$tahun.", telah mengadakan penelitian Penawaran Harga yang diajukan oleh perusahaan/rekanan: ".$nama_perusahaan.".";
+}
 $section->addText($isi, $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Yang dihadiri oleh anggota tim peneliti harga : ", $UFontStyleName, $isiParagrafStyle2);
@@ -57,13 +61,52 @@ $section->addListItem("PMK Tentang Standar Biaya Masukan Th. Anggaran 2018.", 0,
 
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Pengajuan harga penawaran dari perusahaan/rekanan :", $UFontStyleName, $isiParagrafStyle2);
-$section->addText($nama_perusahaan.", sebesar Rp.".$pengaturan->formatUang($total_penawaran).".- Terbilang (".$pengaturan->penyebut($total_penawaran)."Rupiah)", $fontStyleName, $isiParagrafStyle2);
+
+$pisahin = $nama_perusahaan.", sebesar Rp.".$pengaturan->formatUang($total_penawaran).".- Terbilang (".$pengaturan->penyebut($total_penawaran)."Rupiah )";
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(" ", $pisahin);
+$ambil1=null;
+$ambil2=null;
+for($i=0;$i<count($pisah);$i++){
+    if(substr($pisah[$i],0,1)=="("){
+        $ambil1=$i; 
+    }elseif(substr($pisah[$i],0,1)==")"){
+        $ambil2=$i;
+        break;
+    }
+}
+    for($i=0;$i<count($pisah);$i++){
+        if($i>=$ambil1 && $i<=$ambil2){
+            $textRun->addText($pisah[$i]." ", $IFontStyleName);
+        }else{
+            $textRun->addText($pisah[$i]." ", $fontStyleName);
+        }
+    }
 
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Hasil Penelitian/Evaluasi :", $UFontStyleName, $isiParagrafStyle2);
-$isi = "Berdasarkan hasil evaluasi yang kami lakukan dan telah memperhatikan ketentuan dan peraturan yang berlaku, kami berpendapat bahwa penawaran dari ".$nama_perusahaan." yang beralamat di ".$alamat_perusahaan.", sebesar Rp.".$pengaturan->formatUang($total_penawaran)." (".$pengaturan->penyebut($total_penawaran)."Rupiah) termasuk pajak, dapat dilakukan negosiasi harga.";
-$section->addText($isi, $fontStyleName, $isiParagrafStyle2);
 
+$pisahin = "Berdasarkan hasil evaluasi yang kami lakukan dan telah memperhatikan ketentuan dan peraturan yang berlaku, kami berpendapat bahwa penawaran dari ".$nama_perusahaan." yang beralamat di ".$alamat_perusahaan.", sebesar Rp.".$pengaturan->formatUang($total_penawaran)." (".$pengaturan->penyebut($total_penawaran)."Rupiah ) termasuk pajak, dapat dilakukan negosiasi harga.";
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(" ", $pisahin);
+$ambil1=null;
+$ambil2=null;
+for($i=0;$i<count($pisah);$i++){
+    if(substr($pisah[$i],0,1)=="("){
+        $ambil1=$i; 
+    }elseif(substr($pisah[$i],0,1)==")"){
+        $ambil2=$i;
+        break;
+    }
+}
+    for($i=0;$i<count($pisah);$i++){
+        if($i>=$ambil1 && $i<=$ambil2){
+            $textRun->addText($pisah[$i]." ", $IFontStyleName);
+        }else{
+            $textRun->addText($pisah[$i]." ", $fontStyleName);
+        }
+    }
+    
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Demikian berita acara ini kami buat, untuk dipergunakan sebagaimana mestinya.", $fontStyleName, $isiParagrafStyle2);
 

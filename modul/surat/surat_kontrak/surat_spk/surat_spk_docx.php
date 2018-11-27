@@ -58,7 +58,32 @@ $pihak2->addText("$alamat_perusahaan", $fontStyle,array('spaceAfter' => 0));
 $pihak2->addText("Dalam hal ini bertindak untuk dan atas nama $nama_perusahaan yang selanjutnya disebut PIHAK KEDUA (II);", $fontStyle,array('spaceAfter' => 0));
 
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("Pihak KESATU dan pihak KEDUA telah sepakat mengadakan persetujuan bahwa pihak KESATU memberikan pekerjaan kepada pihak KEDUA berupa Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun 2018, dengan harga borongan sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)."Rupiah) termasuk pajak, dengan ketentuan/syarat- syarat sebagai berikut :", $fontStyleName, $isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+	$pisahin = "Pihak KESATU dan pihak KEDUA telah sepakat mengadakan persetujuan bahwa pihak KESATU memberikan pekerjaan kepada pihak KEDUA berupa Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun, dengan harga borongan sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)." Rupiah ) termasuk pajak, dengan ketentuan/syarat- syarat sebagai berikut :";
+}else{
+	$pisahin = "Pihak KESATU dan pihak KEDUA telah sepakat mengadakan persetujuan bahwa pihak KESATU memberikan pekerjaan kepada pihak KEDUA berupa Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, dengan harga borongan sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)." Rupiah ) termasuk pajak, dengan ketentuan/syarat- syarat sebagai berikut :";
+}
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(" ", $pisahin);
+$ambil1=null;
+$ambil2=null;
+for($i=0;$i<count($pisah);$i++){
+	if(substr($pisah[$i],0,1)=="("){
+		$ambil1=$i;	
+	}elseif(substr($pisah[$i],0,1)==")"){
+		$ambil2=$i;
+		break;
+	}
+}
+echo $ambil1."\n";
+echo $ambil2;
+	for($i=0;$i<count($pisah);$i++){
+		if($i>=$ambil1 && $i<=$ambil2){
+			$textRun->addText($pisah[$i]." ", $IFontStyleName);
+		}else{
+			$textRun->addText($pisah[$i]." ", $fontStyleName);
+		}
+	}
 
 //list syarat spk
 $phpWord->addNumberingStyle(
@@ -71,7 +96,7 @@ $phpWord->addNumberingStyle(
 $section->addListItem("Harga borongan tersebut merupakan harga tetap, sudah termasuk PPN 10% yang berlaku;", 0, $fontStyleName,'syarat_spk', $isiParagrafStyle2);
 $tanggalTempo = $pengaturan->formatTanggal($pengaturan->penjumlahanTanggal($tanggal_spk,7));
 $section->addListItem("Penyelesaian pekerjaan/penyerahan barang selambat-lambatnya tanggal {$tanggalTempo};", 0, $fontStyleName,'syarat_spk', $isiParagrafStyle2);
-$section->addListItem("Pembayaran harga borongan akan dibebankan pada BOPTN UIN Sunan Gunung Djati tahun $tahun setelah barang-barang diterima dengan lengkap dan baik melalui Panitia Pemeriksa dan Penerima Barang;", 0, $fontStyleName,'syarat_spk', $isiParagrafStyle2);
+$section->addListItem("Pembayaran harga borongan akan dibebankan pada ".$tipe_pagu." UIN Sunan Gunung Djati tahun $tahun setelah barang-barang diterima dengan lengkap dan baik melalui Panitia Pemeriksa dan Penerima Barang;", 0, $fontStyleName,'syarat_spk', $isiParagrafStyle2);
 $section->addListItem("Kecuali berdasarkan sebab-sebab yang dapat diterima PIHAK KESATU atau sebab diluar kekuasaan PIHAK KEDUA, maka keterlambatan penyerahan sesuai dengan point 2 tersebut di atas, akan dikenakan denda sebesar dari jumlah harga yang masih harus diserahkan dan harus dilunasi dalam tempo 07 (tujuh) hari batas waktu tersebut;", 0, $fontStyleName,'syarat_spk', $isiParagrafStyle2);
 $section->addListItem("Biaya-biaya yang timbul sebagai sebab akibat Surat Perintah Kerja ini sepenuhnya tanggung jawab PIHAK KEDUA, termasuk kewajiban membayar Bea Materai menurut ketentuan yang berlaku;", 0, $fontStyleName,'syarat_spk', $isiParagrafStyle2);
 $section->addListItem("Apabila ada terjadi perselisihan akan diselesaikan secara musyawarah atau melalui Pengadilan Negeri.", 0, $fontStyleName,'syarat_spk', $isiParagrafStyle2);

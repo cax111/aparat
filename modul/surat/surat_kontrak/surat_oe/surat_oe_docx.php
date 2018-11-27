@@ -44,8 +44,11 @@ for($i=0;$i<count($pisah);$i++){
 	$x++;
 }
 
-$section->addText(strtoupper($judul).' JURUSAN '.strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
-$section->addText('FAKULTAS '.strtoupper($nama_fakultas).' UIN SUNAN GUNUNG DJATI BANDUNG TAHUN '.$tahun, $boldFontStyleName, $judulParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+	$section->addText(strtoupper($judul).' '.strtoupper($nama_jurusan).' UIN SUNAN GUNUNG DJATI BANDUNG TAHUN '.$tahun, $boldFontStyleName, $judulParagrafStyle);
+}else{
+	$section->addText(strtoupper($judul).' JURUSAN '.strtoupper($nama_jurusan).' FAKULTAS '.strtoupper($nama_fakultas).' UIN SUNAN GUNUNG DJATI BANDUNG TAHUN '.$tahun, $boldFontStyleName, $judulParagrafStyle);
+}
 $section->addText('Nomor: '.$nomor_oe, $fontStyleName, $judulParagrafStyle);
 
 //isi word
@@ -69,7 +72,11 @@ $section->addText("Jabatan \t : Pejabat Pembuat Komitmen", $fontStyleName, $isiP
 $section->addText("Alamat \t : $alamat_universitas", $fontStyleName, $isiParagrafStyle);
 $section->addText('', $fontStyleName, $isiParagrafStyle);
 
-$pisahin = 'Berdasarkan survey harga dan pagu BOPTN Tahun Anggaran '.$tahun.' untuk Pekerjaan '.$judul.' Jurusan '.$nama_jurusan.' Fakultas '.$nama_fakultas.', telah menetapkan harga perkiraan sendiri untuk Pekerjaan '.$judul.' Jurusan '.$nama_jurusan.' Fakultas '.$nama_fakultas.' UIN Sunan Gunung Djati Bandung tahun '.$tahun.', sebesar Rp.'.$pengaturan->formatUang($total_hps).' ('.$pengaturan->penyebut($total_hps).'Rupiah), dengan rincian sebagai berikut :';
+if($nama_fakultas=="lain-lain"){
+	$pisahin = 'Berdasarkan survey harga dan pagu '.$tipe_pagu.' Tahun Anggaran '.$tahun.' untuk Pekerjaan '.$judul.' '.$nama_jurusan.' UIN Sunan Gunung Djati Bandung, telah menetapkan harga perkiraan sendiri untuk Pekerjaan '.$judul.' '.$nama_jurusan.' UIN Sunan Gunung Djati Bandung tahun '.$tahun.', sebesar Rp.'.$pengaturan->formatUang($total_hps).' ('.$pengaturan->penyebut($total_hps).' Rupiah ), dengan rincian sebagai berikut :';
+}else{
+	$pisahin = 'Berdasarkan survey harga dan pagu '.$tipe_pagu.' Tahun Anggaran '.$tahun.' untuk Pekerjaan '.$judul.' Jurusan '.$nama_jurusan.' Fakultas '.$nama_fakultas.', telah menetapkan harga perkiraan sendiri untuk Pekerjaan '.$judul.' Jurusan '.$nama_jurusan.' Fakultas '.$nama_fakultas.' UIN Sunan Gunung Djati Bandung tahun '.$tahun.', sebesar Rp.'.$pengaturan->formatUang($total_hps).' ('.$pengaturan->penyebut($total_hps).' Rupiah ), dengan rincian sebagai berikut :';
+}
 $textRun = $section->createTextRun($isiParagrafStyle2);
 $pisah = explode(" ", $pisahin);
 $ambil1=null;
@@ -77,7 +84,7 @@ $ambil2=null;
 for($i=0;$i<count($pisah);$i++){
 	if(substr($pisah[$i],0,1)=="("){
 		$ambil1=$i;	
-	}elseif(substr($pisah[$i],6,1)==")"){
+	}elseif(substr($pisah[$i],0,1)==")"){
 		$ambil2=$i;
 		break;
 	}
@@ -150,7 +157,7 @@ $table->addCell(null)->addText("Rp.".$pengaturan->formatUang($total_hps), $fontS
 //end tabel
 $section->addText('', $fontStyleName, $isiParagrafStyle2);
 
-$pisahin = "Terbilang sebesar Rp.".$pengaturan->formatUang($total_hps)." (".$pengaturan->penyebut($total_hps)."Rupiah)";
+$pisahin = "Terbilang sebesar Rp.".$pengaturan->formatUang($total_hps)." (".$pengaturan->penyebut($total_hps)." Rupiah )";
 $textRun = $section->createTextRun($isiParagrafStyle2);
 $pisah = explode(" ", $pisahin);
 for($i=0;$i<count($pisah);$i++){
@@ -162,7 +169,11 @@ for($i=0;$i<count($pisah);$i++){
 }
 
 $section->addText('', $fontStyleName, $isiParagrafStyle2);
-$section->addText('Demikian harga perkiraan ini dibuat, sebagai kelengkapan proses Pekerjaan Pengadaan Belanja Pemeliharaan Jurusan '.$nama_jurusan.' Fakultas '.$nama_fakultas.' UIN Sunan Gunung Djati Bandung tahun '.$tahun.'.', $fontStyleName, $isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+	$section->addText('Demikian harga perkiraan ini dibuat, sebagai kelengkapan proses Pekerjaan '.$judul.' '.$nama_jurusan.' UIN Sunan Gunung Djati Bandung tahun '.$tahun.'.', $fontStyleName, $isiParagrafStyle2);
+}else{
+	$section->addText('Demikian harga perkiraan ini dibuat, sebagai kelengkapan proses Pekerjaan '.$judul.' Jurusan '.$nama_jurusan.' Fakultas '.$nama_fakultas.' UIN Sunan Gunung Djati Bandung tahun '.$tahun.'.', $fontStyleName, $isiParagrafStyle2);
+}
 $section->addText('', $fontStyleName, $isiParagrafStyle2);
 $section->addText("\t\t\t\t\t\t\t\t\tBandung, $tanggal_oe", $fontStyleName, $isiParagrafStyle2);
 $section->addText("\t\t\t\t\t\t\t\t\tPejabat Pembuat Komitmen", $fontStyleName, $isiParagrafStyle2);

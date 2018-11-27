@@ -23,6 +23,10 @@
             <td colspan="2"><?php echo ": ".$t['judul_surat']; ?></td>
           </tr> 
           <tr>
+            <th>Tipe Pagu Surat</th>
+            <td colspan="2"><?php echo ": ".$t['tipe_pagu']; ?></td>
+          </tr> 
+          <tr>
             <th>Nama Pejabat Pembuat Komitmen</th>
             <td colspan="2"><?php echo ": ".$t['nama_ppk']; ?></td>
           </tr> 
@@ -47,10 +51,6 @@
             $tampil = $surat_kontrak->tampilPanitia("WHERE id_surat='$t[id_surat]'");
             foreach($tampil AS $tp){
           ?>
-          <tr>
-            <td><?=$tp['nama_panitia'];?></td>
-            <td colspan="2"><?=$tp['jabatan_panitia'];?></td>
-          </tr> 
           <?php
               $nama_panitia[$i]=$tp['nama_panitia'];
               $jabatan_panitia[$i]=$tp['jabatan_panitia'];
@@ -58,11 +58,35 @@
             }
           ?>
           <tr>
+            <td><?=$nama_panitia[0];?></td>
+            <td colspan="2"><?=$jabatan_panitia[0];?></td>
+          </tr> 
+          <tr>
+            <td><?=$nama_panitia[1];?></td>
+            <td colspan="2"><?=$jabatan_panitia[1];?></td>
+          </tr> 
+          <tr>
+            <td><?=$nama_panitia[2];?></td>
+            <td colspan="2"><?=$jabatan_panitia[2];?></td>
+          </tr> 
+          <tr>
+            <td><?=$nama_panitia[3];?></td>
+            <td><?=$jabatan_panitia[3];?></td>
+            <td>NIP : <?="\t".$nama_panitia[6];?></td> 
+          <tr>
+            <td><?=$nama_panitia[4];?></td>
+            <td colspan="2"><?=$jabatan_panitia[4];?></td>
+          </tr> 
+          <tr>
+            <td><?=$nama_panitia[5];?></td>
+            <td colspan="2"><?=$jabatan_panitia[5];?></td>
+          </tr> 
+          <tr>
             <th colspan="2">Surat - Surat</th>
             <th>Aksi </th>
           </tr>
           <tr>
-            <th><div class="margin">Surat OE</div></th>
+            <th><div class="margin">Surat Harga Perkiraan Sendiri / Owner Estimate (OE)</div></th>
             <?php 
               if(empty($t['nomor_oe'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -79,7 +103,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat PPH</div></th>
+            <th><div class="margin">Surat Permintaan Penawaran Harga (PPH)</div></th>
             <?php
               if(empty($t['nomor_pph'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -96,7 +120,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat BAPPSPH</div></th>
+            <th><div class="margin">Surat Berita Acara Pemasukan/Pembukaan Surat Penawaran Harga (BAP/PSPH)</div></th>
             <?php 
               if(empty($t['nomor_bappsph'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -112,7 +136,7 @@
               }
             ?>
           </tr>
-          <tr>
+          <!-- <tr>
             <th><div class="margin">Surat PPSPH</div></th>
             <?php 
               if(empty($t['waktu_ppsph'])){
@@ -128,9 +152,9 @@
                 </td>";
               }
             ?>
-          </tr>
+          </tr> -->
           <tr>
-            <th><div class="margin">Surat BAPPH</div></th>
+            <th><div class="margin">Surat Berita Acara Penelitian Penawaran harga (BAPPH)</div></th>
             <?php 
               if(empty($t['nomor_bapph'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -147,7 +171,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat UKNH</div></th>
+            <th><div class="margin">Surat Undangan Klarifikasi dan Negosiasi Harga (UKNH)</div></th>
             <?php 
               if(empty($t['nomor_uknh'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -164,7 +188,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat BAKNH</div></th>
+            <th><div class="margin">Surat Berita Acara Klarifikasi dan Negosiasi Harga (BAKNH)</div></th>
             <?php 
               if(empty($t['nomor_baknh'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -181,7 +205,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat LBAKNH</div></th>
+            <th><div class="margin">Surat Lampiran Berita Acara Klarifikasi dan Negosiasi Harga (LBAKNH)</div></th>
             <?php 
               if(empty($t['nomor_baknh'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -198,7 +222,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat LHKNH</div></th>
+            <th><div class="margin">Surat Lampiran Hasil Klarifikasi dan Negosiasi Harga (LHKNH)</div></th>
             <?php 
               if(empty($t['nomor_baknh'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -215,7 +239,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat KNH</div></th>
+            <th><div class="margin">Surat Klarifikasi dan Negosiasi Harga (KNH)</div></th>
             <?php 
               if(empty($t['nomor_baknh'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -232,7 +256,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat BAHPL</div></th>
+            <th><div class="margin">Surat Berita Acara Hasil Pengadaan Langsung (BAHPL)</div></th>
             <?php 
               if(empty($t['nomor_bahpl'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -249,7 +273,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat PP</div></th>
+            <th><div class="margin">Surat Penetapan Penyedia</div></th>
             <?php 
               if(empty($t['nomor_pp'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -266,7 +290,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat BAPP</div></th>
+            <th><div class="margin">Surat Berita Acara Pengumuman Penyedia (BAPP)</div></th>
             <?php 
               if(empty($t['nomor_bapp'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -283,7 +307,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat SPK</div></th>
+            <th><div class="margin">Surat Perintah Kerja (SPK)</div></th>
             <?php 
               if(empty($t['nomor_spk'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -300,7 +324,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat LSPK</div></th>
+            <th><div class="margin">Lampiran Surat Perintah Kerja (LSPK)</div></th>
             <?php 
               if(empty($t['nomor_spk'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -334,7 +358,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat BAPB</div></th>
+            <th><div class="margin">Surat Berita Acara Pemeriksaan Barang (BAPB)</div></th>
             <?php 
               if(empty($t['nomor_bapb'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -351,7 +375,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat BASTB</div></th>
+            <th><div class="margin">Surat Berita Acara Serah Terima Barang (BASTB)</div></th>
             <?php 
               if(empty($t['nomor_bastb'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -368,7 +392,7 @@
             ?>
           </tr>
           <tr>
-            <th><div class="margin">Surat BAP</div></th>
+            <th><div class="margin">Surat Berita Acara Pembayaran (BAP)</div></th>
             <?php 
               if(empty($t['nomor_bap'])){
                 echo"<td><div class='margin'> : <i class='fa fa-times'></i> Belum Ada Surat</div></td>                      
@@ -392,7 +416,7 @@
   <!-- /.box-body -->
   <div class="box-footer clearfix">
     <a href="index.php?page=surat_kontrak&act=edit_surat_kontrak&id=<?php echo $t['id_surat'] ?>" class="btn btn-sm btn-warning btn-flat pull-left margin">Ubah Data Surat Kontrak </a>
-    <a href="index.php?page=surat_kontrak&act=hapus_surat_kontrak&id=<?php echo $t['id_surat'] ?>" class="btn btn-sm btn-danger btn-flat pull-left margin"> Hapus Surat</a>
+    <a href="index.php?page=surat_kontrak&act=hapus_surat_kontrak&id=<?php echo $t['id_surat'] ?>" class="btn btn-sm btn-danger btn-flat pull-left margin" onclick="return confirm('apakah anda yakin akan menghapus semua data surat ini ? data yang terhapus meliputi semua data barang, data surat Perusahaan, dan data surat kontrak')"> Hapus Surat</a>
     <?php
       $i=0;
       $tampilpt=$surat_pt->tampilPT("WHERE id_surat=$_GET[id]");
@@ -452,6 +476,7 @@
         <input type="hidden" name="nama_ppb" value="<?php echo $t['nama_ppb'] ?>">
         <input type="hidden" name="nip_ppb" value="<?php echo $t['nip_ppb'] ?>">
         <input type="hidden" name="tahun" value="<?php echo $t['tahun_surat'] ?>">
+        <input type="hidden" name="tipe_pagu" value="<?php echo $t['tipe_pagu'] ?>">
         <input type="hidden" name="nama_perusahaan" value="<?php echo $t['nama_perusahaan'] ?>">
         <input type="hidden" name="alamat_perusahaan" value="<?php echo $t['alamat_perusahaan'] ?>">
         <input type="hidden" name="direktur_perusahaan" value="<?php echo $t['nama_user'] ?>">
@@ -514,10 +539,10 @@
             echo "<input type='hidden' name='total_harga_penawaran"."$i' value='$total_harga_penawaran[$i]'>";
             echo "<input type='hidden' name='total_harga_spk"."$i' value='$total_harga_spk[$i]'>";
           }
-          for($i=0;$i<6;$i++){
+          for($i=0;$i<7;$i++){
             echo "<input type='hidden' name='nama_panitia"."$i' value='$nama_panitia[$i]'>";
           }
-          for($i=0;$i<6;$i++){
+          for($i=0;$i<7;$i++){
             echo "<input type='hidden' name='jabatan_panitia"."$i' value='$jabatan_panitia[$i]'>";
           }
         ?>

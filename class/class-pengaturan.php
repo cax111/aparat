@@ -156,7 +156,7 @@
 				$temp = $this->penyebut($nilai/1000000000) . " Milyar" . $this->penyebut(fmod($nilai,1000000000));
 			} else if ($nilai < 1000000000000000) {
 				$temp = $this->penyebut($nilai/1000000000000) . " Trilyun" . $this->penyebut(fmod($nilai,1000000000000));
-			}     
+			}  
 			return $temp;
 		}
 	}

@@ -5,9 +5,9 @@
         $nomor = (int)($pisah[0])+1;
         $gabungNomor = "0".$nomor;
         
-        for($i=1;$i<6;$i++){
+        /*for($i=1;$i<6;$i++){
             $gabungNomor.="/".$pisah[$i];
-        }
+        }*/
 ?>
 <form action="" method="post" accept-charset="utf-8"> 
   <div id="form" style="display:none" class="box box-info">
@@ -17,11 +17,11 @@
       <h3 class="box-title">Kebutuhan Surat Berita Acara Pemasukan/Pembukaan Surat Penawaran Harga(BAP/PSPH)</h3>
               
       <h5>Nomor Surat</h5>
-      <input class="form-control" type="text" name="nomor_bappsph" value=<?=$gabungNomor?> required="required" >
+      <input class="form-control" type="text" name="nomor_bappsph" value="" required="required" >
       <h5>Tanggal</h5>
       <input class="form-control" type="date" name="tanggal_bappsph" required="required" >
-      <h5>Waktu Pengerjaan</h5>
-      <input class="form-control" type="text" name="waktu_pengerjaan" required="required" >
+      <h5>Waktu Pengerjaan(/hari)</h5>
+      <input class="form-control" type="text" name="waktu_pengerjaan" required="required" placeholder="ex : 4">
       <br/>
       <input class="form-control btn btn-success" type="submit" name="ok" value="Submit">
     </div> 

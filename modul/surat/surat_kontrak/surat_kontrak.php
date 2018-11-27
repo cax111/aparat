@@ -11,7 +11,7 @@
                       <tr>
                         <th>ID</th>
                         <th>Judul Surat</th>
-                        <th>Jurusan</th>
+                        <th>Jurusan / Lembaga</th>
                         <th>Perusahaan Pemegang Proyek</th>
                         <th>Status Surat Proyek</th>
                         <th>Aksi</th>

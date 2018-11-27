@@ -21,6 +21,12 @@
             <h5 style="display:none" id="jr">Jurusan</h5>
             <div style="display:none" id="jurusan"></div>
             <!-- end ajaxjurusan -->  
+            <h5>Tipe Pagu Surat</h5>
+            <select class="form-control" name="tipe_pagu" required="required">
+                <option selected value="" disabled="">silakan isi tipe pagu</option>
+                <option value="BOPTN">BOPTN</option>
+                <option value="DIPA">DIPA</option>
+            </select>
             <h5>Nama Pejabat Pembuat Komitmen</h5>
             <input class="form-control" type="text" name="nama_ppk" placeholder="Nama PPK" required="required" >
             <h5>NIP Pejabat Pembuat Komitmen</h5>
@@ -29,17 +35,19 @@
             <input class="form-control" type="text" name="nama_ppb" placeholder="Nama PPB" required="required" >
             <h5>NIP Pokja Pengadaan Barang/Jasa</h5>
             <input class="form-control" type="text" name="nip_ppb" placeholder="NIP PPB" required="required" >
-            <h5>Ketua Panitia Peneliti Harga</h5>
+            <h5>Nama Ketua Panitia Peneliti Harga</h5>
             <input class="form-control" type="text" name="kpph" placeholder="Nama Ketua Panitia Peneliti Harga" required="required" >
-            <h5>Sekretaris Panitia Peneliti Harga</h5>
+            <h5>Nama Sekretaris Panitia Peneliti Harga</h5>
             <input class="form-control" type="text" name="spph" placeholder="Nama Sekretaris Panitia Peneliti Harga" required="required" >
-            <h5>Anggota Panitia Peneliti Harga</h5>
+            <h5>Nama Anggota Panitia Peneliti Harga</h5>
             <input class="form-control" type="text" name="apph" placeholder="Nama Anggota Panitia Peneliti Harga" required="required" >
-            <h5>Panitia Penerima Hasil Pekerjaan 1</h5>
+            <h5>Nama Panitia Penerima Hasil Pekerjaan 1</h5>
             <input class="form-control" type="text" name="pphp1" placeholder="Nama Panitia Penerima Hasil Pekerjaan 1" required="required" >
-            <h5>Panitia Penerima Hasil Pekerjaan 2</h5>
+            <h5>NIP Panitia Penerima Hasil Pekerjaan 1</h5>
+            <input class="form-control" type="text" name="npphp1" placeholder="Nip Panitia Penerima Hasil Pekerjaan 1" required="required" >
+            <h5>Nama Panitia Penerima Hasil Pekerjaan 2</h5>
             <input class="form-control" type="text" name="pphp2" placeholder="Nama Panitia Penerima Hasil Pekerjaan 2" required="required" >
-            <h5>Panitia Penerima Hasil Pekerjaan 3</h5>
+            <h5>Nama Panitia Penerima Hasil Pekerjaan 3</h5>
             <input class="form-control" type="text" name="pphp3" placeholder="Nama Panitia Penerima Hasil Pekerjaan 3" required="required" >
             <br/>
             <input class="form-control btn btn-success" type="submit" name="ok" value="Submit">
@@ -58,6 +66,7 @@
                                                         $_POST['spph'],
                                                         $_POST['apph'],
                                                         $_POST['pphp1'],
+                                                        $_POST['npphp1'],
                                                         $_POST['pphp2'],
                                                         $_POST['pphp3']);
                 if($status=="Input Data Gagal."){

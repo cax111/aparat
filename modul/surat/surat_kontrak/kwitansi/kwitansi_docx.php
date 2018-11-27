@@ -7,7 +7,7 @@ $section = $phpWord->addSection(
 $JudulFontStyleName = 'Judulkwitansi'; 
 $phpWord->addFontStyle($JudulFontStyleName, array('name' => 'Times New Roman','size' => 26,'bold' => true,'italic' => true));
 $norekFontStyleName = 'norekkwitansi'; 
-$phpWord->addFontStyle($norekFontStyleName, array('name' => 'Times New Roman','size' => 15,'bold' => true,'italic' => true,'bgColor' => '#c0c0c0'));
+$phpWord->addFontStyle($norekFontStyleName, array('name' => 'Times New Roman','size' => 12,'bold' => true,'italic' => true,'bgColor' => '#c0c0c0'));
 $fontStyleName = 'textkwitansi'; 
 $phpWord->addFontStyle($fontStyleName, array('name' => 'Times New Roman','size' => 12,'italic' => true));
 $ttdFontStyleName = 'ttdkwitansi'; 
@@ -28,8 +28,9 @@ $phpWord->addParagraphStyle($listTTDBAPPH, array('alignment' => \PhpOffice\PhpWo
 //mulai isi word -- 
 
 $section->addText("Kwitansi", $JudulFontStyleName, $isiParagrafStyle);
-$section->addText("", $JudulFontStyleName, $isiParagrafStyle);
-$section->addText("", $JudulFontStyleName, $isiParagrafStyle);
+$section->addText("Nomor\t : ", $fontStyleName, $isiParagrafStyle);
+$section->addText("NPWP\t : $npwp_perusahaan".$npwp, $fontStyleName, $isiParagrafStyle);
+$section->addText($nama_perusahaan, $fontStyleName, $isiParagrafStyle);
 $section->addText("No Rek. BRI. 0354-01-000890-56-1", $norekFontStyleName, $isiParagrafStyle);
 $section->addText("", $JudulFontStyleName, $isiParagrafStyle);
 $section->addText("", $JudulFontStyleName, $isiParagrafStyle);
@@ -41,7 +42,7 @@ $fancyTableFirstRowStyle = array('borderBottomSize' => 18, 'borderBottomColor' =
 $VAlignCellStyle = array('valign' => 'center');
 $VAlignCellStyleTop = array('valign' => 'top');	
 $fontStyle = array('size'=>12, 'name'=>'Times New Roman', 'italic'=>true);
-$font2Style = array('size'=>15, 'name'=>'Times New Roman', 'bold'=>true, 'italic'=>true,'bgColor' => '#c0c0c0');
+$font2Style = array('size'=>12, 'name'=>'Times New Roman', 'bold'=>true, 'italic'=>true,'bgColor' => '#c0c0c0');
 $font3Style = array('size'=>12, 'name'=>'Times New Roman', 'bold'=>true, 'italic'=>true,'bgColor' => '#c0c0c0');
 $font4Style = array('size'=>12, 'name'=>'Times New Roman');
 
@@ -61,7 +62,7 @@ $table->addRow();
 $table->addCell(2400, $VAlignCellStyleTop)->addText("Untuk Pembayaran ", $fontStyle,array('spaceAfter' => 0));
 $table->addCell(100, $VAlignCellStyleTop)->addText(":", $fontStyle,array('spaceAfter' => 0));
 $isi = $table->addCell(null, $VAlignCellStyle);
-$isi->addText("Pekerjaan ".$judul." Jurusan ".$jurusan." Fakultas ".$fakultas." ".$universitas." tahun ".$tahun.". Berdasarkan Surat Perintah Kerja (Kontrak) Nomor: ".$nomor_spk." tanggal ".$pengaturan->formatTanggal($tanggal_spk)." dan Berita Acara Serah Terima Barang Nomor: ".$nomor_bastb." tanggal ".$pengaturan->formatTanggal($pengaturan->penjumlahanTanggal($tanggal_spk,7)), $font4Style,array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::BOTH,'spaceAfter' => 0));
+$isi->addText("Pekerjaan ".$judul." Jurusan ".$nama_jurusan." Fakultas ".$nama_fakultas." ".$universitas." tahun ".$tahun.". Berdasarkan Surat Perintah Kerja (Kontrak) Nomor: ".$nomor_spk." tanggal ".$pengaturan->formatTanggal($tanggal_spk)." dan Berita Acara Serah Terima Barang Nomor: ".$nomor_bastb." tanggal ".$pengaturan->formatTanggal($pengaturan->penjumlahanTanggal($tanggal_spk,7)), $font4Style,array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::BOTH,'spaceAfter' => 0));
 $table->addRow();
 $table->addCell(2400, $VAlignCellStyleTop)->addText("Terbilang ", $fontStyle,array('spaceAfter' => 0));
 $table->addCell(100, $VAlignCellStyleTop)->addText(":", $fontStyle,array('spaceAfter' => 0));

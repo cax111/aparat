@@ -53,6 +53,16 @@
         </div>  
       <h5>Tahun Surat</h5>
       <input class="form-control" type="text" name="tahun_surat" value="<?=$t['tahun_surat']?>" required="required" >
+      <h5>Tahun Surat</h5>
+      <select class="form-control" name="tipe_pagu" required="required" >
+        <?php if($t['tipe_pagu']=="BOPTN"){ ?>
+          <option value="<?=$t['tipe_pagu']?>" selected>BOPTN</option>
+          <option value="DIPA">DIPA</option>
+        <?php }else{ ?>
+          <option value="<?=$t['tipe_pagu']?>" selected>DIPA</option>
+          <option value="BOPTN">BOPTN</option>
+        <?php } ?>
+      </select>
       <h5>Nama Pejabat Pembuat Komitmen</h5>
       <input class="form-control" type="text" name="nama_ppk" value="<?=$t['nama_ppk']?>" required="required" >
       <h5>NIP Pejabat Pembuat Komitmen</h5>
@@ -77,6 +87,8 @@
       <input class="form-control" type="text" name="apph" value="<?=$nama_panitia['2']?>" required="required" >
       <h5>Panitia Peneriama Hasil Pekerjaan 1</h5>
       <input class="form-control" type="text" name="pphp1" value="<?=$nama_panitia['3']?>" required="required" >
+      <h5>NIP Panitia Penerima Hasil Pekerjaan 1</h5>
+      <input class="form-control" type="text" name="npphp1" value="<?=$nama_panitia['6']?>" placeholder="Nip Panitia Penerima Hasil Pekerjaan 1" required="required" >
       <h5>Panitia Peneriama Hasil Pekerjaan 2</h5>
       <input class="form-control" type="text" name="pphp2" value="<?=$nama_panitia['4']?>" required="required" >
       <h5>Panitia Peneriama Hasil Pekerjaan 3</h5>
@@ -98,6 +110,7 @@
                                               $_POST['jurusan'],
                                               $_SESSION['id_user_aparat'],
                                               $_POST['tahun_surat'],
+                                              $_POST['tipe_pagu'],
                                               $_POST['nama_ppk'],
                                               $_POST['nip_ppk'],
                                               $_POST['nama_ppb'],
@@ -106,6 +119,7 @@
                                               $_POST['spph'],
                                               $_POST['apph'],
                                               $_POST['pphp1'],
+                                              $_POST['npphp1'],
                                               $_POST['pphp2'],
                                               $_POST['pphp3'],
                                               $_GET['id'],

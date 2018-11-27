@@ -36,8 +36,15 @@ $section->addText("\t\t\t\t\t\t\t\t\t$alamat_perusahaan", $boldFontStyleName, $i
 //isi word
 $section->addText("Assalamu'alaikum Wr. Wb.", $IFontStyleName, $isiParagrafStyle);
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
-$section->addText("\tMemperhatikan BOPTN UIN Sunan Gunung Djati Bandung Tahun Anggaran $tahun, bersama ini kami mengundang saudara untuk bekerjasama dalam hal Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun.", $fontStyleName, $isiParagrafStyle2);
-$section->addText("\tSebagai bahan pertimbangan saudara, berikut ini uraian daftar kebutuhan Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun:", $fontStyleName,$isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("\tMemperhatikan ".$tipe_pagu." UIN Sunan Gunung Djati Bandung Tahun Anggaran $tahun, bersama ini kami mengundang saudara untuk bekerjasama dalam hal Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun.", $fontStyleName, $isiParagrafStyle2);
+    $section->addText("\tSebagai bahan pertimbangan saudara, berikut ini uraian daftar kebutuhan Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun :", $fontStyleName,$isiParagrafStyle2);
+
+}else{
+    $section->addText("\tMemperhatikan ".$tipe_pagu." UIN Sunan Gunung Djati Bandung Tahun Anggaran $tahun, bersama ini kami mengundang saudara untuk bekerjasama dalam hal Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun.", $fontStyleName, $isiParagrafStyle2);
+    $section->addText("\tSebagai bahan pertimbangan saudara, berikut ini uraian daftar kebutuhan Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun :", $fontStyleName,$isiParagrafStyle2);
+
+}
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 
 //tambahkan tabel

@@ -24,10 +24,14 @@ $section->addText("\t\t\t\t\t\t\t\t\t$alamat_perusahaan", $boldFontStyleName, $i
 //isi word
 $section->addText("Assalamu'alaikum Wr. Wb.,", $IFontStyleName, $isiParagrafStyle);
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
-$section->addText("\tBerdasarkan surat saudara, Nomor : ".$nomor_ph.", tanggal ".$pengaturan->formatTanggal($tanggal_bappsph)." tentang penawaran harga Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun, kami mengundang saudara untuk melakukan negosiasi harga untuk pekerjaan dimaksud.", $fontStyleName, $isiParagrafStyle2);
-$section->addText("\tKegiatan klarifikasi dan negosiasi ini akan dilaksanakan pada Tanggal ".$pengaturan->formatTanggal($tanggal_baknh).", bertempat di gedung jurusan $nama_jurusan fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, $alamat_universitas, Pukul $waktu_uknh sampai dengan selesai.", $fontStyleName,$isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+	$section->addText("\tBerdasarkan surat saudara, Nomor : ".$nomor_ph.", tanggal".$pengaturan->formatTanggal($tanggal_bappsph)." tentang penawaran harga Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun, kami mengundang saudara untuk melakukan negosiasi harga untuk pekerjaan dimaksud.", $fontStyleName, $isiParagrafStyle2);
+	$section->addText("\tKegiatan klarifikasi dan negosiasi ini akan dilaksanakan pada Tanggal ".$pengaturan->formatTanggal($tanggal_baknh).", bertempat di gedung $nama_jurusan UIN Sunan Gunung Djati Bandung, $alamat_universitas, Pukul $waktu_uknh sampai dengan selesai.", $fontStyleName,$isiParagrafStyle2);
+}else{
+	$section->addText("\tBerdasarkan surat saudara, Nomor : ".$nomor_ph.", tanggal".$pengaturan->formatTanggal($tanggal_bappsph)." tentang penawaran harga Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun, kami mengundang saudara untuk melakukan negosiasi harga untuk pekerjaan dimaksud.", $fontStyleName, $isiParagrafStyle2);
+	$section->addText("\tKegiatan klarifikasi dan negosiasi ini akan dilaksanakan pada Tanggal ".$pengaturan->formatTanggal($tanggal_baknh).", bertempat di gedung jurusan $nama_jurusan fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, $alamat_universitas, Pukul $waktu_uknh sampai dengan selesai.", $fontStyleName,$isiParagrafStyle2);
+}
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
-
 $section->addText("Demikian atas perhatian dan kerjasama yang baik, kami haturkan terima kasih.", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
 

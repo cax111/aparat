@@ -5,9 +5,9 @@
         $nomor = (int)($pisah[0])+1;
         $gabungNomor = "0".$nomor;
         
-        for($i=1;$i<6;$i++){
+        /*for($i=1;$i<6;$i++){
             $gabungNomor.="/".$pisah[$i];
-        }
+        }*/
 ?>
 <form method="post" accept-charset="utf-8"> 
     <div id="form" style="display:none" class="box box-success">
@@ -15,7 +15,7 @@
             <i class="fa fa-envelope"></i>
             <h3 class="box-title">Input Data Surat Perintah Kerja (SPK)</h3>
             <h5>Nomor Surat</h5>
-            <input class="form-control" type="text" name="nomor" required="required" value=<?=$gabungNomor?>>
+            <input class="form-control" type="text" name="nomor" required="required" value="">
             <h5>Tanggal Surat</h5>
             <input class="form-control" type="date" name="tanggal" required="required" id="tanggal">
             <br/>

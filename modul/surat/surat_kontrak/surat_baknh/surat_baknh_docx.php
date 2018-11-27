@@ -46,17 +46,23 @@ $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirst
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
 $table->addCell(3700,$VMergeStart)->addText("JURUSAN ".strtoupper($nama_jurusan)."\nFAKULTAS ".strtoupper($nama_fakultas)."\n".strtoupper($nama_universitas)."\n\nBANDUNG", $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(null, $VAlignCellStyle)->addText('BERITA ACARA KLARIFIKASI DAN NEGOISASI HARGA ', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));   
+$table->addCell(null, $VAlignCellStyle)->addText('BERITA ACARA KLARIFIKASI DAN NEGOSIASI HARGA', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));   
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(null,$VAlignCellStyle)->addText("Nomor\t\t:\t$nomor_baknh", $fontStyle, array('spaceAfter' => 0));
+$table->addCell(null,$VAlignCellStyle)->addText("Nomor\t\t:     $nomor_baknh", $fontStyle, array('spaceAfter' => 0));
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(null,$VAlignCellStyle)->addText("Tanggal\t\t:\t".$pengaturan->formatTanggal($tanggal_baknh), $fontStyle, array('spaceAfter' => 0));
+$table->addCell(null,$VAlignCellStyle)->addText("Tanggal\t\t:     ".$pengaturan->formatTanggal($tanggal_baknh), $fontStyle, array('spaceAfter' => 0));
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(null,$VAlignCellStyle)->addText("Pekerjaan\t:\tPekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Tahun $tahun", $fontStyle, array('spaceAfter' => 0));
-
+$cell = $table->addCell(null,$VAlignCellStyle);
+$innerCell = $cell->addTable()->addRow();
+$innerCell->addCell(1700)->addText("Pekerjaan\t: \t\t", $fontStyle, array('spaceAfter' => 0));
+if($nama_fakultas=="lain-lain"){
+    $innerCell->addCell()->addText("Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Tahun $tahun", $fontStyle, array('spaceAfter' => 0));
+}else{
+    $innerCell->addCell()->addText("Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Tahun $tahun", $fontStyle, array('spaceAfter' => 0));
+}
 //end tabel
 // end header
 
@@ -64,7 +70,11 @@ $table->addCell(null,$VAlignCellStyle)->addText("Pekerjaan\t:\tPekerjaan $judul 
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 $hari_baknh = $pengaturan->tanggalToNamaHari($tanggal_baknh);
 $tanggal_huruf_baknh = $pengaturan->formatTanggal2($tanggal_baknh);
-$section->addText("Pada hari $hari_baknh Tanggal $tanggal_huruf_baknh, bertempat di Ruang Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, kami yang bertanda tangan di bawah ini, Tim Peneliti Harga penawaran Harga Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun, telah mengadakan rapat evaluasi/negosiasi penawaran harga atas pekerjaan tersebut diatas : ", $fontStyleName, $isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("Pada hari $hari_baknh Tanggal $tanggal_huruf_baknh, bertempat di Ruang $nama_jurusan UIN Sunan Gunung Djati Bandung, kami yang bertanda tangan di bawah ini, Tim Peneliti Harga penawaran Harga Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun, telah mengadakan rapat evaluasi/negosiasi penawaran harga atas pekerjaan tersebut diatas : ", $fontStyleName, $isiParagrafStyle2);
+}else{
+    $section->addText("Pada hari $hari_baknh Tanggal $tanggal_huruf_baknh, bertempat di Ruang Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, kami yang bertanda tangan di bawah ini, Tim Peneliti Harga penawaran Harga Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun, telah mengadakan rapat evaluasi/negosiasi penawaran harga atas pekerjaan tersebut diatas : ", $fontStyleName, $isiParagrafStyle2);
+}
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 
 //buat list item number
@@ -102,9 +112,46 @@ $section->addListItem('Dasar Evaluasi/Negosiasi Penawaran Harga adalah sebagai b
     $section->addListItem("Surat Penawaran Harga", 1, $fontStyleName,'multilevelBAKNH1', $isiParagrafStyle2);
 
 $section->addListItem('Kesimpulan Rapat :', 0, $fontStyleName,'multilevelBAKNH1', $isiParagrafStyle2);
-    $section->addListItem("Berdasarkan perkiraan perhitungan harga sesuai dengan hasil perhitungan OE/HPS, bahwa penawaran harga Pekerjaan $judul  Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, yang diajukan oleh $nama_perusahaan Rp.".$pengaturan->formatUang($total_penawaran)." (".$pengaturan->penyebut($total_penawaran)."Rupiah) setelah dilakukan evaluasi secara seksama, ternyata penawaran harga tersebut dapat dinegosiasi dan diperoleh harga negosiasi menjadi sebesar Rp.".$pengaturan->formatUang($total_spk)." (".$pengaturan->penyebut($total_spk)."Rupiah), Termasuk Pajak Yang Berlaku; ", 1, $fontStyleName,'multilevelBAKNH1', $isiParagrafStyle2);
-    $section->addListItem("Dari hasil negosiasi penawaran harga (terlampir) dengan memperhatikan dan meneliti kesesuaian dengan spesifikasi teknis yang dipersyaratkan dan jumlah harga yang diajukan, panitia sepakat mengusulkan kepada Pejabat Pembuat Komitmen jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, bahwa $nama_perusahaan layak untuk diberi Surat perintah Kerja (SPK)/Perjanjian Kontrak.", 1, $fontStyleName,'multilevelBAKNH1', $isiParagrafStyle2);
-
+    if($nama_fakultas=="lain-lain"){
+        $pisahin = "Berdasarkan perkiraan perhitungan harga sesuai dengan hasil perhitungan OE/HPS, bahwa penawaran harga Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun, yang diajukan oleh $nama_perusahaan Rp.".$pengaturan->formatUang($total_penawaran)." (".$pengaturan->penyebut($total_penawaran)." Rupiah ) setelah dilakukan evaluasi secara seksama, ternyata penawaran harga tersebut dapat dinegosiasi dan diperoleh harga negosiasi menjadi sebesar Rp.".$pengaturan->formatUang($total_spk)." (".$pengaturan->penyebut($total_spk)." Rupiah ), Termasuk Pajak Yang Berlaku;";
+    }else{
+        $pisahin = "Berdasarkan perkiraan perhitungan harga sesuai dengan hasil perhitungan OE/HPS, bahwa penawaran harga Pekerjaan $judul  Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, yang diajukan oleh $nama_perusahaan Rp.".$pengaturan->formatUang($total_penawaran)." (".$pengaturan->penyebut($total_penawaran)." Rupiah ) setelah dilakukan evaluasi secara seksama, ternyata penawaran harga tersebut dapat dinegosiasi dan diperoleh harga negosiasi menjadi sebesar Rp.".$pengaturan->formatUang($total_spk)." (".$pengaturan->penyebut($total_spk)." Rupiah ), Termasuk Pajak Yang Berlaku;";
+    }
+    $textRun = $section->addListItemRun(1,'multilevelBAKNH1', $isiParagrafStyle2);
+    $pisah = explode(" ", $pisahin);
+    $ambil1=null;
+    $ambil2=null;
+    $ambil3=null;
+    $ambil4=null;
+    for($i=0;$i<count($pisah);$i++){
+        if(substr($pisah[$i],0,1)=="("){
+            $ambil1=$i; 
+        }elseif(substr($pisah[$i],0,1)==")"){
+            $ambil2=$i;
+            break;
+        }
+    }
+    for($i=$ambil2+1;$i<count($pisah);$i++){
+        if(substr($pisah[$i],0,1)=="("){
+            $ambil3=$i; 
+        }elseif(substr($pisah[$i],0,1)==")"){
+            $ambil4=$i;
+            break;
+        }
+    }
+    for($i=0;$i<count($pisah);$i++){
+        if($i>=$ambil1 && $i<=$ambil2 ||$i>=$ambil3 && $i<=$ambil4){
+            $textRun->addText($pisah[$i]." ", $IFontStyleName);
+        }else{
+            $textRun->addText($pisah[$i]." ", $fontStyleName);
+        }
+    }
+    
+    if($nama_fakultas=="lain-lain"){
+        $section->addListItem("Dari hasil negosiasi penawaran harga (terlampir) dengan memperhatikan dan meneliti kesesuaian dengan spesifikasi teknis yang dipersyaratkan dan jumlah harga yang diajukan, panitia sepakat mengusulkan kepada Pejabat Pembuat Komitmen $nama_jurusan UIN Sunan Gunung Djati Bandung, bahwa $nama_perusahaan layak untuk diberi Surat perintah Kerja (SPK)/Perjanjian Kontrak.", 1, $fontStyleName,'multilevelBAKNH1', $isiParagrafStyle2);
+    }else{
+        $section->addListItem("Dari hasil negosiasi penawaran harga (terlampir) dengan memperhatikan dan meneliti kesesuaian dengan spesifikasi teknis yang dipersyaratkan dan jumlah harga yang diajukan, panitia sepakat mengusulkan kepada Pejabat Pembuat Komitmen jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, bahwa $nama_perusahaan layak untuk diberi Surat perintah Kerja (SPK)/Perjanjian Kontrak.", 1, $fontStyleName,'multilevelBAKNH1', $isiParagrafStyle2);
+    }
 //end list item
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Demikian risalah rapat ini dibuat untuk dipergunakan sebagaimana mestinya.", $fontStyleName, $isiParagrafStyle2);

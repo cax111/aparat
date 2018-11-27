@@ -23,6 +23,7 @@ $VMergeStart = array('valign' => 'center', 'vMerge' => 'restart');
 $VMergeContinue = array('valign' => 'center', 'vMerge' => 'continue');
 
 $fontStyle = array('size'=>10, 'name'=>'Times New Roman');
+$SfontStyle = array('size'=>11, 'name'=>'Times New Roman');
 $TfontStyle = array('bold'=>true, 'size'=>10, 'name' => 'Times New Roman');
 $spekFontStyle = array('bold'=>true, 'size'=>8, 'name' => 'Times New Roman');
 
@@ -33,14 +34,20 @@ $table->addCell(3700,$VMergeStart)->addText("JURUSAN ".strtoupper($nama_jurusan)
 $table->addCell(null, $VAlignCellStyle)->addText('BERITA ACARA PEMASUKAN/PEMBUKAAN SURAT PENAWARAN HARGA', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));   
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(null,$VAlignCellStyle)->addText("Nomor\t\t:\t$nomor_bappsph", $fontStyle, array('spaceAfter' => 0));
+$table->addCell(null,$VAlignCellStyle)->addText("Nomor\t\t:     $nomor_bappsph", $fontStyle, array('spaceAfter' => 0));
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(null,$VAlignCellStyle)->addText("Tanggal\t\t:\t$tanggal_bappsph", $fontStyle, array('spaceAfter' => 0));
+$table->addCell(null,$VAlignCellStyle)->addText("Tanggal\t\t:     $tanggal_bappsph", $fontStyle, array('spaceAfter' => 0));
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(null,$VAlignCellStyle)->addText("Pekerjaan\t:\tPekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Tahun $tahun", $fontStyle, array('spaceAfter' => 0));
-
+$cell = $table->addCell(null,$VAlignCellStyle);
+$innerCell = $cell->addTable()->addRow();
+$innerCell->addCell(1700)->addText("Pekerjaan\t:", $fontStyle, array('spaceAfter' => 0));
+if($nama_fakultas=="lain-lain"){
+    $innerCell->addCell()->addText("Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Tahun $tahun", $fontStyle, array('spaceAfter' => 0));
+}else{
+    $innerCell->addCell()->addText("Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Tahun $tahun", $fontStyle, array('spaceAfter' => 0));
+}
 //end tabel
 // end header
 
@@ -59,13 +66,22 @@ $phpWord->addNumberingStyle(
                     )
             	)
         	);
+//buat table
+$fancyTableStyleName = 'header BAPPSPH2';
+$fancyTableStyle = array('borderSize' => 0, 'borderColor' => 'ffffff', 'cellMargin' => 0);
 $section->addListItem('Yang dihadiri oleh anggota tim peneliti harga : ', 0, $fontStyleName,'multilevel1', $isiParagrafStyle2);
+$phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
+$table2 = $section->addTable($fancyTableStyleName);
 for($i=0;$i<3;$i++){
-    $section->addListItem("$nama_panitia[$i]\t: $jabatan_panitia[$i]", 1, $fontStyleName,'multilevel1', $isiParagrafStyle2);
+    $table2->addRow();
+    $table2->addCell(null,$VAlignCellStyle)->addText("       ".($i+1).".", $SfontStyle, array('spaceAfter' => 0));
+    $table2->addCell(null,$VAlignCellStyle)->addText("   ".$nama_panitia[$i], $SfontStyle, array('spaceAfter' => 0));
+    $table2->addCell(null,$VAlignCellStyle)->addText("\t: ", $SfontStyle, array('spaceAfter' => 0));
+    $table2->addCell(null,$VAlignCellStyle)->addText("  ".$jabatan_panitia[$i], $SfontStyle, array('spaceAfter' => 0));
 }
 $section->addListItem('Penyedia Barang : ', 0, $fontStyleName,'multilevel1', $isiParagrafStyle2);
 $section->addText("$nama_perusahaan diwakili oleh : ", $fontStyleName, $isiParagrafStyle2);
-    $section->addListItem("$direktur_perusahaan\t\t\t: Direktur", 1, $fontStyleName,'multilevel1', $isiParagrafStyle2);
+    $section->addListItem("$direktur_perusahaan\t\t: Direktur", 1, $fontStyleName,'multilevel1', $isiParagrafStyle2);
 
 //end list item
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
@@ -84,11 +100,20 @@ $phpWord->addNumberingStyle(
                 )
             );
 $section->addListItem('Wakil Penyedia Barang : ', 0, $fontStyleName,'multilevel2', $isiParagrafStyle2);
-    $section->addListItem("$direktur_perusahaan\t\t\t: Direktur", 1, $fontStyleName,'multilevel2', $isiParagrafStyle2);
+    $section->addListItem("$direktur_perusahaan\t\t: Direktur", 1, $fontStyleName,'multilevel2', $isiParagrafStyle2);
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
 $section->addListItem('Wakil dari Pokja : ', 0, $fontStyleName,'multilevel2', $isiParagrafStyle2);
-    $section->addListItem("$nama_panitia[0]\t: Ketua", 1, $fontStyleName,'multilevel2', $isiParagrafStyle2);
-    $section->addListItem("$nama_panitia[1]\t: Anggota", 1, $fontStyleName,'multilevel2', $isiParagrafStyle2);
+$table3 = $section->addTable($fancyTableStyleName);
+    $table3->addRow();
+    $table3->addCell(null,$VAlignCellStyle)->addText("       ".(1).".", $SfontStyle, array('spaceAfter' => 0));
+    $table3->addCell(null,$VAlignCellStyle)->addText("   ".$nama_panitia[0]." ", $SfontStyle, array('spaceAfter' => 0));
+    $table3->addCell(null,$VAlignCellStyle)->addText("\t: ", $SfontStyle, array('spaceAfter' => 0));
+    $table3->addCell(null,$VAlignCellStyle)->addText("  Ketua", $SfontStyle, array('spaceAfter' => 0));
+    $table3->addRow();
+    $table3->addCell(null,$VAlignCellStyle)->addText("       ".(2).".", $SfontStyle, array('spaceAfter' => 0));
+    $table3->addCell(null,$VAlignCellStyle)->addText("   ".$nama_panitia[1]." ", $SfontStyle, array('spaceAfter' => 0));
+    $table3->addCell(null,$VAlignCellStyle)->addText("\t: ", $SfontStyle, array('spaceAfter' => 0));
+    $table3->addCell(null,$VAlignCellStyle)->addText("  Anggota", $SfontStyle, array('spaceAfter' => 0));
 
 //end list item
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
@@ -103,7 +128,27 @@ $phpWord->addNumberingStyle(
             );
 $section->addListItem("Pembukaan surat penawaran yang diajukan oleh ".strtoupper($nama_perusahaan)." kemudian isinya dibuka dan diperiksa, ternyata perusahaan tersebut memenuhi syarat.", 0, $fontStyleName,'multilevel3', $isiParagrafStyle2);
 $section->addListItem("Pengecekan kelengkapan persyaratan administrasi dan teknis, sesuai dengan persyaratan yang diminta yaitu kepada peserta diwajibkan melampirkan foto copy (terlampir).", 0, $fontStyleName,'multilevel3', $isiParagrafStyle2);
-$section->addListItem("Jumlah Penawaran yang diajukan/disampaikan oleh ".strtoupper($nama_perusahaan)." adalah sebesar Rp.".$pengaturan->formatUang($total_penawaran)." terbilang (".$pengaturan->penyebut($total_penawaran)."Rupiah) dengan masa pelaksanaan pekerjaan selama $waktu_pengerjaan_bappsph (".$pengaturan->penyebut($waktu_pengerjaan_bappsph)." ) hari kelender.", 0, $fontStyleName,'multilevel3', $isiParagrafStyle2);
+$pisahin = "Jumlah Penawaran yang diajukan/disampaikan oleh ".strtoupper($nama_perusahaan)." adalah sebesar Rp.".$pengaturan->formatUang($total_penawaran)." terbilang (".$pengaturan->penyebut($total_penawaran)."Rupiah ) dengan masa pelaksanaan pekerjaan selama $waktu_pengerjaan_bappsph (".$pengaturan->penyebut($waktu_pengerjaan_bappsph).") hari kalender.";
+$textRun = $section->addListItemRun(0,'multilevel3', $isiParagrafStyle2);
+$pisah = explode(" ", $pisahin);
+$ambil1=null;
+$ambil2=null;
+for($i=0;$i<count($pisah);$i++){
+    if(substr($pisah[$i],0,1)=="("){
+        $ambil1=$i; 
+    }elseif(substr($pisah[$i],0,1)==")"){
+        $ambil2=$i;
+        break;
+    }
+}
+    for($i=0;$i<count($pisah);$i++){
+        if($i>=$ambil1 && $i<=$ambil2){
+            $textRun->addText($pisah[$i]." ", $IFontStyleName);
+        }else{
+            $textRun->addText($pisah[$i]." ", $fontStyleName);
+        }
+    }
+//$section->addListItem(, 0, $fontStyleName,'multilevel3', $isiParagrafStyle2);
 $section->addListItem("Hasil pembukaan surat penawaran.", 0, $fontStyleName,'multilevel3', $isiParagrafStyle2);
 
 //end list item

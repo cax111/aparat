@@ -57,7 +57,7 @@ $pihak1->addText("Dalam hal ini bertindak untuk dan atas nama $nama_perusahaan y
 //tabel
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("2. Nama\t: $nama_panitia[3]", $fontStyleName, $isiParagrafStyle2);
-$section->addText("   Jabatan\t: $jabatan_panitia[3]", $fontStyleName, $isiParagrafStyle2);
+$section->addText("   Jabatan\t: Panitia Penerima Hasil Kerja", $fontStyleName, $isiParagrafStyle2);
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
@@ -71,8 +71,11 @@ $pihak2->addText("Dalam hal ini bertindak untuk dan atas Fakultas $nama_fakultas
 $section->addText("",null,$isiParagrafStyle2);
 $section->addText("Sesuai dengan Surat Perintah Kerja (Kontrak) Nomor:  $nomor_spk tanggal ".$pengaturan->formatTanggal($tanggal_spk)." dan Berita Acara Pemerikasaan Barang/Hasil Pekerjaan Nomor: ".$nomor_bastb." tanggal ".$pengaturan->formatTanggal($pengaturan->penjumlahanTanggal($tanggal_spk,7)).", maka PIHAK KESATU pada hari ini dan tanggal tersebut di atas telah menyerahkan barang-barang di bawah ini kepada PIHAK KEDUA, dan PIHAK KEDUA telah menerimanya dengan baik, lengkap dan cukup memuaskan. ",$fontStyleName,$isiParagrafStyle2);
 $section->addText("",null,$isiParagrafStyle2);
-
-$section->addText("Adapun pekerjaan yang telah diserahterimakan adalah $judul  Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, dengan perincian sebagai berikut:",$fontStyleName,$isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("Adapun pekerjaan yang telah diserahterimakan adalah $judul $nama_jurusan UIN Sunan Gunung Djati Bandung, dengan perincian sebagai berikut :",$fontStyleName,$isiParagrafStyle2);
+}else{
+    $section->addText("Adapun pekerjaan yang telah diserahterimakan adalah $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung, dengan perincian sebagai berikut :",$fontStyleName,$isiParagrafStyle2);
+}
 $section->addText("",null,$isiParagrafStyle2);
 
 //tambahkan tabel
@@ -124,7 +127,7 @@ $pihak2->addText("PIHAK PERTAMA (I)", $fontStyle,array('spaceAfter' => 0));
 $pihak2->addText("$nama_perusahaan", $fontStyle,array('spaceAfter' => 0));
 $pihak1 = $table->addCell(3000, $VAlignCellStyle);
 $pihak1->addText("PIHAK KEDUA (II)", $fontStyle,array('spaceAfter' => 0));
-$pihak1->addText("$jabatan_panitia[3]", $fontStyle,array('spaceAfter' => 0));
+$pihak1->addText("Panitia Penerima Hasil Kerja", $fontStyle,array('spaceAfter' => 0));
 $table->addRow();
 $pihak1 = $table->addCell(null);
 $pihak1->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
@@ -139,7 +142,7 @@ $pihak2->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
 $pihak2->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
 $pihak2->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
 $pihak2->addText("$nama_panitia[3]", $BoldUFontStyle,array('spaceAfter' => 0));
-$pihak2->addText("NIP. $nip_ppk", $fontStyle,array('spaceAfter' => 0));
+$pihak2->addText("NIP. $nip_panitia", $fontStyle,array('spaceAfter' => 0));
 //end tabel
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 
@@ -153,7 +156,7 @@ $phpWord->addNumberingStyle(
             );
 //tambahkan tabel
 $fancyTableStyleName = 'tandaTangan';
-$fancyTableStyle = array('cellMargin' => 0, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER, 'cellSpacing' => 50);
+$fancyTableStyle = array('cellMargin' => 0, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::LEFT, 'cellSpacing' => 50);
 $fancyTableFirstRowStyle = array('borderBottomSize' => 18, 'borderBottomColor' => '000000', 'afterSpacing' => 0);
 $VAlignCellStyle = array('valign' => 'center');
 
@@ -163,28 +166,30 @@ $BoldUFontStyle = array('size'=>11, 'name'=>'Times New Roman', 'bold'=>true, 'un
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$ttd = $table->addCell(5000, $VAlignCellStyle);
+$ttd = $table->addCell(2500, $VAlignCellStyle);
 $ttd->addText("Mengetahui,", $fontStyle,array('spaceAfter' => 0));
 $ttd->addText("Pejabat Pembuat Komitmen,", $fontStyle,array('spaceAfter' => 0));
-$namaPanitia = $table->addCell(null);
+$table->addCell(1700, $VAlignCellStyle);
+$namaPanitia = $table->addCell(2500);
     $namaPanitia->addText("", $fontStyleName, $isiParagrafStyle2);
     $namaPanitia->addListItem("$nama_panitia[4]", 0, $fontStyleName,'serahTerimaTTD', $isiParagrafStyle2);
-$x = $table->addCell();
+$x = $table->addCell(2000);
     $x->addText("", $fontStyleName, $isiParagrafStyle2);
     $x->addText(" (_______________)", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $table->addRow();
 $table->addCell(3000)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $table->addRow();
-$tppb = $table->addCell(3000);
+$tppb = $table->addCell(2500);
     $tppb->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
     $tppb->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
     $tppb->addText("$nama_ppk", $BoldUFontStyle,array('spaceAfter' => 0));
     $tppb->addText("NIP. $nip_ppk", $fontStyle,array('spaceAfter' => 0));
-$namaPanitia = $table->addCell(null);
+$table->addCell(1700, $VAlignCellStyle);
+$namaPanitia = $table->addCell(2500);
     $namaPanitia->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
     $namaPanitia->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
     $namaPanitia->addListItem("$nama_panitia[5]", 0, $fontStyleName,'serahTerimaTTD', $isiParagrafStyle2);
-$x = $table->addCell(null);
+$x = $table->addCell(2000);
 $x->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $x->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $x->addText(" (_______________)", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));

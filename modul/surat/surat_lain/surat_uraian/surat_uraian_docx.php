@@ -35,8 +35,13 @@ $section->addText('', $fontStyleName, $isiParagrafStyle);
 $section->addText('', $fontStyleName, $isiParagrafStyle);
 $section->addText('', $fontStyleName, $isiParagrafStyle);
 $section->addText('', $fontStyleName, $isiParagrafStyle);
-$section->addText(strtoupper("Uraian Kegiatan Pekerjaan $judul Jurusan $nama_jurusan"), $boldFontStyleName, $judulParagrafStyle);
-$section->addText('FAKULTAS '.strtoupper($nama_fakultas).' UIN SUNAN GUNUNG DJATI BANDUNG TAHUN '.$tahun, $boldFontStyleName, $judulParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+	$section->addText(strtoupper("Uraian Kegiatan Pekerjaan $judul $nama_jurusan"), $boldFontStyleName, $judulParagrafStyle);
+	$section->addText(' UIN SUNAN GUNUNG DJATI BANDUNG TAHUN '.$tahun, $boldFontStyleName, $judulParagrafStyle);
+}else{
+	$section->addText(strtoupper("Uraian Kegiatan Pekerjaan $judul Jurusan $nama_jurusan"), $boldFontStyleName, $judulParagrafStyle);
+	$section->addText('FAKULTAS '.strtoupper($nama_fakultas).' UIN SUNAN GUNUNG DJATI BANDUNG TAHUN '.$tahun, $boldFontStyleName, $judulParagrafStyle);
+}
 //isi word
 $section->addText('', $fontStyleName, $isiParagrafStyle);
 //tambahkan tabel

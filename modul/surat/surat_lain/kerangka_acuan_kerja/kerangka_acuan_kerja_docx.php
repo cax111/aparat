@@ -40,9 +40,15 @@ $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addImage("../../dist/img/logo-uin.jpg", array('width'=>150,'height'=>115, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER));
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+$section->addText("PEKERJAAN ".strtoupper($judul)." ".strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
+$section->addText("UIN SUNAN GUNUNG DJATI TAHUN ".$tahun, $boldFontStyleName, $judulParagrafStyle);
+$section->addText("", $boldFontStyleName, $judulParagrafStyle);
+}else{
 $section->addText("PEKERJAAN ".strtoupper($judul)." JURUSAN ".strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
 $section->addText("FAKULTAS ".strtoupper($nama_fakultas), $boldFontStyleName, $judulParagrafStyle);
-$section->addText("UIN SUNAN GUNUNG DJATI TAHUN ".$tahun, $boldFontStyleName, $judulParagrafStyle);
+$section->addText("UIN SUNAN GUNUNG DJATI TAHUN ".$tahun, $boldFontStyleName, $judulParagrafStyle);    
+}
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
@@ -81,12 +87,16 @@ $phpWord->addFontStyle($boldFontStyleName, array('name' => 'Times New Roman','si
 //set paragraf
 $judulParagrafStyle = 'judulStylePH';
 $phpWord->addParagraphStyle($judulParagrafStyle, array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
-
-$section->addText("KERANGKA ACUAN KERJA", $boldFontStyleName, $judulParagrafStyle);
-$section->addText(strtoupper($judul)." JURUSAN ".strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
-$section->addText("FAKULTAS ".strtoupper($nama_fakultas), $boldFontStyleName, $judulParagrafStyle);
-$section->addText("UIN SUNAN GUNUNG DJATI BANDUNG", $boldFontStyleName, $judulParagrafStyle);
-
+if($nama_fakultas=="lain-lain"){
+    $section->addText("KERANGKA ACUAN KERJA", $boldFontStyleName, $judulParagrafStyle);
+    $section->addText(strtoupper($judul)." ".strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
+    $section->addText("UIN SUNAN GUNUNG DJATI BANDUNG", $boldFontStyleName, $judulParagrafStyle);
+}else{
+    $section->addText("KERANGKA ACUAN KERJA", $boldFontStyleName, $judulParagrafStyle);
+    $section->addText(strtoupper($judul)." JURUSAN ".strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
+    $section->addText("FAKULTAS ".strtoupper($nama_fakultas), $boldFontStyleName, $judulParagrafStyle);
+    $section->addText("UIN SUNAN GUNUNG DJATI BANDUNG", $boldFontStyleName, $judulParagrafStyle);
+}
 //list
 $phpWord->addNumberingStyle(
             	'multilevel',
@@ -96,38 +106,71 @@ $phpWord->addNumberingStyle(
                 	)
             	)
         	);
-$section->addListItem('LATAR BELAKANG', 0, $boldFontStyleName,'multilevel');
-$section->addText("Pembangunan sarana dan prasarana diperlukan dalam menunjang seluruh kegiatan yang ada dalam sebuah institusi, salah satunya adalah Jurusan Informatika Fakultas Sains dan Teknologi. Dimana alat alat yang ada kurang optimal dikarenaka pemakaian alat khusunya komputer yang tarus menerus. Hal ini tentu akan berpengaruh dalam proses pembelajaran dikelas. Maka dari itu pemeliharaan kebutuhan akan ram, mouse dan keyboard dirasa sangat penting untuk mendukung proses pembelajaran khusus pelayanan terhadap mahasiswa. Atas dasar itu untuk menunjang sarana dan prasarana pengadaan akan ram, mouse dan keyboard diperlukan sebagai bagian perlengkapan untuk menunjang kelancaran dan kesuksesan kegiatan pelayanan ataupun kegiatan belajar.", $fontStyleName, $paragrafStyle);
-$section->addText("", $fontStyleName, $paragrafStyle);
+if($nama_fakultas=="lain-lain"){
+    $section->addListItem('LATAR BELAKANG', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Pembangunan sarana dan prasarana diperlukan dalam menunjang seluruh kegiatan yang ada dalam sebuah institusi, salah satunya adalah $nama_jurusan UIN Sunan Gunung Djati Bandung. Dimana alat alat yang ada kurang optimal dikarenakan pemakaian yang terus menerus. Maka dari itu pemeliharaan kebutuhan akan $judul dirasa sangat penting untuk mendukung proses pembelajaran khusus pelayanan terhadap mahasiswa. Atas dasar itu untuk menunjang sarana dan prasarana, $judul diperlukan sebagai bagian perlengkapan untuk menunjang kelancaran dan kesuksesan kegiatan pelayanan ataupun kegiatan belajar.", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
 
-$section->addListItem('MAKSUD', 0, $boldFontStyleName,'multilevel');
-$section->addText("Pengadaan ram, mouse dan keyboard pada jurusan $nama_jurusan Fakultas $nama_fakultas Uin Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
-$section->addText("", $fontStyleName, $paragrafStyle);
+    $section->addListItem('MAKSUD', 0, $boldFontStyleName,'multilevel');
+    $section->addText("$judul pada $nama_jurusan UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
 
-$section->addListItem('TUJUAN', 0, $boldFontStyleName,'multilevel');
-$section->addText("Tersedianya sarana dan prasarana untuk meningkatkan proses pelayanan ataupun belajar oleh mahasiswa.", $fontStyleName, $paragrafStyle);
-$section->addText("", $fontStyleName, $paragrafStyle);
+    $section->addListItem('TUJUAN', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Tersedianya sarana dan prasarana untuk meningkatkan proses pelayanan ataupun belajar oleh mahasiswa.", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
 
-$section->addListItem('SASARAN, LOKASI, SUMBER DANA DAN RUANG LINGKUP PEKERJAAN', 0, $boldFontStyleName,'multilevel');
-$section->addText("Sasaran yang ingin dicapai dalam $judul ini adalah :", $fontStyleName, $paragrafStyle);
-$section->addListItem('Terwujudnya kelancaran dan kemudahan dalam pelaksanaan aktifitas dalam bekerja dan belajar.', 1, $boldFontStyleName,'multilevel');
-$section->addListItem('Terpenuhinya kebutuhan sarana dan prasana.', 1, $boldFontStyleName,'multilevel');
-$section->addListItem('Sumber Pendanaan', 1, $boldFontStyleName,'multilevel');
-$section->addText("Sumber pendanaan dalam kegiatan $judul Jurusan $nama_jurusan dan Fakultas $nama_fakultas UIN Sunan Gunung Djati ini adalah BOPTN tahun $tahun. Untuk pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung yaitu maksimal sebesar 16.000.000., terbilang: (Enam Belas Juta Rupiah).", $fontStyleName, $paragrafStyle);
-$section->addText("", $fontStyleName, $paragrafStyle);
+    $section->addListItem('SASARAN, LOKASI, SUMBER DANA DAN RUANG LINGKUP PEKERJAAN', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Sasaran yang ingin dicapai dalam $judul ini adalah :", $fontStyleName, $paragrafStyle);
+    $section->addListItem('Terwujudnya kelancaran dan kemudahan dalam pelaksanaan aktifitas dalam bekerja dan belajar.', 1, $boldFontStyleName,'multilevel');
+    $section->addListItem('Terpenuhinya kebutuhan sarana dan prasana.', 1, $boldFontStyleName,'multilevel');
+    $section->addListItem('Sumber Pendanaan', 1, $boldFontStyleName,'multilevel');
+    $section->addText("Sumber pendanaan dalam kegiatan $judul $nama_jurusan UIN Sunan Gunung Djati ini adalah BOPTN tahun $tahun", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
 
-$section->addListItem('NAMA DAN ORGANISASI KUASA PENGGUNA ANGGARAN', 0, $boldFontStyleName,'multilevel');
-$section->addText("Jurusan $nama_jurusan Fakultas $nama_fakultas Pejabat Pembuat Komitmen pada UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
-$section->addText("", $fontStyleName, $paragrafStyle);
+    $section->addListItem('NAMA DAN ORGANISASI KUASA PENGGUNA ANGGARAN', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Jurusan $nama_jurusan Fakultas $nama_fakultas Pejabat Pembuat Komitmen pada UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
 
-$section->addListItem('JANGKA WAKTU PENYELESAIAN', 0, $boldFontStyleName,'multilevel');
-$section->addText("07 (tujuh) Hari Kalender", $fontStyleName, $paragrafStyle);
-$section->addText("", $fontStyleName, $paragrafStyle);
+    $section->addListItem('JANGKA WAKTU PENYELESAIAN', 0, $boldFontStyleName,'multilevel');
+    $section->addText("07 (tujuh) Hari Kalender", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
 
-$section->addListItem('SPESIFIKASI TEKNIS', 0, $boldFontStyleName,'multilevel');
-$section->addText("Spesifikasi barang yang akan diadakan dalam pengadaan gorden dilakukan dengan penunjukan langsung terhadap penyedia, hal ini dilakukan dikarenakan barang tidak tersedia dalam https://e-katalog.lkpp.go.id/ dalam hal ini panitia sudah mengkases situs tersebut tanggal $tanggal_oe namun hasilnya barang tidak tersedia. Adapun spesifikasi barang meliputi :", $fontStyleName, $paragrafStyle);
-$section->addText("", $fontStyleName, $paragrafStyle);
+    $section->addListItem('SPESIFIKASI TEKNIS', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Spesifikasi barang/alat yang akan diadakan dilakukan dengan penunjukan langsung terhadap penyedia, hal ini dilakukan dikarenakan barang tidak tersedia dalam https://e-katalog.lkpp.go.id/ dalam hal ini panitia sudah mengkases situs tersebut tanggal $tanggal_oe namun hasilnya barang tidak tersedia. Adapun spesifikasi barang meliputi :", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
+}else{
+    $section->addListItem('LATAR BELAKANG', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Pembangunan sarana dan prasarana diperlukan dalam menunjang seluruh kegiatan yang ada dalam sebuah institusi, salah satunya adalah Jurusan $nama_jurusan Fakultas $nama_fakultas. Dimana alat alat yang ada kurang optimal dikarenakan pemakaian yang terus menerus. Maka dari itu pemeliharaan kebutuhan akan $judul dirasa sangat penting untuk mendukung proses pembelajaran khusus pelayanan terhadap mahasiswa. Atas dasar itu untuk menunjang sarana dan prasarana, $judul diperlukan sebagai bagian perlengkapan untuk menunjang kelancaran dan kesuksesan kegiatan pelayanan ataupun kegiatan belajar.", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
 
+    $section->addListItem('MAKSUD', 0, $boldFontStyleName,'multilevel');
+    $section->addText("$judul pada jurusan $nama_jurusan Fakultas $nama_fakultas Uin Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
+
+    $section->addListItem('TUJUAN', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Tersedianya sarana dan prasarana untuk meningkatkan proses pelayanan ataupun belajar oleh mahasiswa.", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
+
+    $section->addListItem('SASARAN, LOKASI, SUMBER DANA DAN RUANG LINGKUP PEKERJAAN', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Sasaran yang ingin dicapai dalam $judul ini adalah :", $fontStyleName, $paragrafStyle);
+    $section->addListItem('Terwujudnya kelancaran dan kemudahan dalam pelaksanaan aktifitas dalam bekerja dan belajar.', 1, $boldFontStyleName,'multilevel');
+    $section->addListItem('Terpenuhinya kebutuhan sarana dan prasana.', 1, $boldFontStyleName,'multilevel');
+    $section->addListItem('Sumber Pendanaan', 1, $boldFontStyleName,'multilevel');
+    $section->addText("Sumber pendanaan dalam kegiatan $judul Jurusan $nama_jurusan dan Fakultas $nama_fakultas UIN Sunan Gunung Djati ini adalah BOPTN tahun $tahun", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
+
+    $section->addListItem('NAMA DAN ORGANISASI KUASA PENGGUNA ANGGARAN', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Jurusan $nama_jurusan Fakultas $nama_fakultas Pejabat Pembuat Komitmen pada UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
+
+    $section->addListItem('JANGKA WAKTU PENYELESAIAN', 0, $boldFontStyleName,'multilevel');
+    $section->addText("07 (tujuh) Hari Kalender", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
+
+    $section->addListItem('SPESIFIKASI TEKNIS', 0, $boldFontStyleName,'multilevel');
+    $section->addText("Spesifikasi barang/alat yang akan diadakan dilakukan dengan penunjukan langsung terhadap penyedia, hal ini dilakukan dikarenakan barang tidak tersedia dalam https://e-katalog.lkpp.go.id/ dalam hal ini panitia sudah mengkases situs tersebut tanggal $tanggal_oe namun hasilnya barang tidak tersedia. Adapun spesifikasi barang meliputi :", $fontStyleName, $paragrafStyle);
+    $section->addText("", $fontStyleName, $paragrafStyle);
+}
 //tambahkan tabel
 
 $fancyTableStyleName = 'Fancy Table';
@@ -159,7 +202,11 @@ for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
 
 $section->addText('', $fontStyleName, $isiParagrafStyle2);
 $section->addListItem('PENUTUP', 0, $boldFontStyleName,'multilevel');
-$section->addText("Demikian Kerangka Acuan Kerja ini disusun sebagai landasan dalam $judul jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
+if(){
+    $section->addText("Demikian Kerangka Acuan Kerja ini disusun sebagai landasan dalam $judul $nama_jurusan UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
+}else{
+    $section->addText("Demikian Kerangka Acuan Kerja ini disusun sebagai landasan dalam $judul jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
+}
 //endlist
 
 $section->addText('', $fontStyleName, $isiParagrafStyle2);

@@ -75,7 +75,7 @@
                           </td>
                           <td><div class='margin'><i class='fa fa-times'></i> Data Belum Diisi</div></td>                      
                           <td>
-                            <a href='index.php?page=surat_st&pageParent=surat_pt&page=surat_st&act=insert_surat_st&id_surat=$_GET[id]&id_barang=$tb[id_barang]' class='btn btn-sm btn-success btn-flat pull-left margin'>Isi data Surat</a>
+                            <a href='index.php?page=surat_pt&act=insert_gambar_pt&id_surat=$_GET[id]&id_barang=$tb[id_barang]' class='btn btn-sm btn-success btn-flat pull-left margin'>Isi data Surat</a>
                           </td>
                           </tr>"; 
 

@@ -20,6 +20,7 @@ $nip_ppk = $_POST['nip_ppk'];
 $nama_ppb = $_POST['nama_ppb'];
 $nip_ppb = $_POST['nip_ppb'];
 $tahun = $_POST['tahun'];
+$tipe_pagu = $_POST['tipe_pagu'];
 $nama_perusahaan=$_POST['nama_perusahaan'];
 $alamat_perusahaan=$_POST['alamat_perusahaan'];
 $direktur_perusahaan=$_POST['direktur_perusahaan'];
@@ -62,6 +63,8 @@ for($i=0;$i<6;$i++){
 	$nama_panitia[$i]=$_POST['nama_panitia'.$i];
 	$jabatan_panitia[$i]=$_POST['jabatan_panitia'.$i];
 }
+$nip_panitia=$_POST['nama_panitia6'];
+
 $total_hps = 0;
 $total_penawaran = 0;
 $total_spk = 0;
@@ -103,13 +106,13 @@ if($_POST['tipe_download']=="kontrak"){
 	include 'surat_kontrak/surat_oe/surat_oe_docx.php';
 	include 'surat_kontrak/surat_pph/surat_pph_docx.php';
 	include 'surat_kontrak/surat_bappsph/surat_bappsph_docx.php';
-	include 'surat_kontrak/surat_ppsph/surat_ppsph_docx.php';
+	//include 'surat_kontrak/surat_ppsph/surat_ppsph_docx.php';
 	include 'surat_kontrak/surat_bapph/surat_bapph_docx.php';
 	include 'surat_kontrak/surat_uknh/surat_uknh_docx.php';
 	include 'surat_kontrak/surat_baknh/surat_baknh_docx.php';
 	include 'surat_kontrak/surat_baknh/surat_lbaknh_docx.php';
-	include 'surat_kontrak/surat_baknh/surat_lhknh_docx.php';
-	include 'surat_kontrak/surat_baknh/surat_knh_docx.php';
+	//include 'surat_kontrak/surat_baknh/surat_lhknh_docx.php';
+	//include 'surat_kontrak/surat_baknh/surat_knh_docx.php';
 	include 'surat_kontrak/surat_bahpl/surat_bahpl_docx.php';
 	include 'surat_kontrak/surat_pp/surat_pp_docx.php';
 	include 'surat_kontrak/surat_bapp/surat_bapp_docx.php';
@@ -120,12 +123,6 @@ if($_POST['tipe_download']=="kontrak"){
 	include 'surat_kontrak/surat_bastb/surat_bastb_docx.php';
 	include 'surat_kontrak/surat_bap/surat_bap_docx.php';
 	include 'surat_kontrak/kwitansi/kwitansi_docx.php';
-}else if($_POST['tipe_download']=="oe"){
-	include 'surat_oe_docx.php';
-}else if($_POST['tipe_download']=="pph"){
-	include 'surat_pph_docx.php';
-}else if($_POST['tipe_download']=="bappsph"){
-	include 'surat_bappsph_docx.php';
 }
 
 // Save file / download file
