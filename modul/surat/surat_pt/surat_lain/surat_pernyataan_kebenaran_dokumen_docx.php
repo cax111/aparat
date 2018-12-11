@@ -38,20 +38,24 @@ $section->addText("E-mail\t\t\t : $email_perusahaan", $fontStyleName, $isiParagr
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 
 //isi word
+if($nama_fakultas=="lain-lain"){
+$section->addText("Menyatakan bahwa dokumen yang di berikan adalah benar dan dengan sesungguhnya, sebagai syarat untuk mengikuti Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun .", $fontStyleName, $isiParagrafStyle2);
+}else{
 $section->addText("Menyatakan bahwa dokumen yang di berikan adalah benar dan dengan sesungguhnya, sebagai syarat untuk mengikuti Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun .", $fontStyleName, $isiParagrafStyle2);
+}
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Demikian Surat Pernyataan ini kami buat dengan sadar dan sebenarnya serta agar untuk dapat dipergunakan sebagaimana mestinya.", $fontStyleName, $isiParagrafStyle2);
 
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t Bandung, $tanggal_penawaran_pph", $fontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t $nama_perusahaan", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t Bandung, $tanggal_penawaran_pph", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t $nama_perusahaan", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t matrai", $IFontStyleName, $isiParagrafStyle);
+$section->addText("\t\t\t\t\t\t\t\t\t\t matrai", $IFontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
-$pisahin = "\t\t\t\t\t\t\t\t\t\t\t ($direktur_perusahaan)";
+$pisahin = "\t\t\t\t\t\t\t\t\t\t ($direktur_perusahaan)";
 $textRun = $section->createTextRun($isiParagrafStyle);
 $pisah = explode(" ",$pisahin);
 for($i=0;$i<count($pisah);$i++){
@@ -62,5 +66,5 @@ for($i=0;$i<count($pisah);$i++){
 	}
 
 }
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t Direktur", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t Direktur", $fontStyleName, $isiParagrafStyle2);
 ?>

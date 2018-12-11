@@ -1,7 +1,7 @@
 <?php
 // New portrait section
 $section = $phpWord->addSection(
-    array('paperSize' => 'Folio', 'marginLeft' => 710, 'marginRight' => 710, 'marginTop' =>3120, 'marginBottom' => 710)
+    array('paperSize' => 'Folio', 'marginLeft' => 1000, 'marginRight' => 1000, 'marginTop' =>3120, 'marginBottom' => 710)
 );
 //set font
 $boldFontStyleName = 'BoldTextLBAKNH'; //bold
@@ -27,9 +27,9 @@ $phpWord->addParagraphStyle($isiParagrafStyle2, array('alignment' => \PhpOffice\
 
 //mulai isi word -- 
 
-$section->addText("\t\t\t\t\t\t\t\tLAMPIRAN\t: SURAT PERINTAH KERJA", $fontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\tNOMOR\t: $nomor_spk", $fontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\tTANGGAL\t: ".$pengaturan->formatTanggal($tanggal_spk), $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\tLAMPIRAN\t: SURAT PERINTAH KERJA", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\tNOMOR\t: $nomor_spk", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\tTANGGAL\t: ".$pengaturan->formatTanggal($tanggal_spk), $fontStyleName, $isiParagrafStyle2);
 $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 $section->addText('', $boldFontStyleName, $isiParagrafStyle2);
 $section->addText('', $boldFontStyleName, $isiParagrafStyle2);

@@ -45,14 +45,14 @@ $section->addText("Demikian Surat Pernyataan ini kami buat dengan sadar dan sebe
 
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t Bandung, $tanggal_penawaran_pph", $fontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t $nama_perusahaan", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t Bandung, $tanggal_penawaran_pph", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t $nama_perusahaan", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t matrai", $IFontStyleName, $isiParagrafStyle);
+$section->addText("\t\t\t\t\t\t\t\t\t\t matrai", $IFontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
-$pisahin = "\t\t\t\t\t\t\t\t\t\t\t ($direktur_perusahaan)";
+$pisahin = "\t\t\t\t\t\t\t\t\t\t ($direktur_perusahaan)";
 $textRun = $section->createTextRun($isiParagrafStyle);
 $pisah = explode(" ",$pisahin);
 for($i=0;$i<count($pisah);$i++){
@@ -63,5 +63,5 @@ for($i=0;$i<count($pisah);$i++){
 	}
 
 }
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t Direktur", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t Direktur", $fontStyleName, $isiParagrafStyle2);
 ?>

@@ -6,8 +6,10 @@ $section = $phpWord->addSection(
 //set font
 $JudulFontStyleName = 'JudulBAP'; //bold
 $phpWord->addFontStyle($JudulFontStyleName, array('name' => 'Times New Roman','size' => 10,'bold' => true));
-$fontStyleName = 'textBAP'; //bold
+$fontStyleName = 'textBAP';
 $phpWord->addFontStyle($fontStyleName, array('name' => 'Times New Roman','size' => 10));
+$boldFontStyleName = 'textBAPBold'; //bold
+$phpWord->addFontStyle($boldFontStyleName, array('name' => 'Times New Roman','size' => 10, 'bold' => true));
 
 //set paragraf
 $judulParagrafStyle = 'judulStyleBAP';
@@ -28,8 +30,18 @@ $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $tanggal_bap = $pengaturan->penjumlahanTanggal($tanggal_spk,8);
 $section->addText("Pada hari ini ".$pengaturan->tanggalToNamaHari($tanggal_bap)." tanggal".$pengaturan->formatTanggal2($tanggal_bap).", kami yang bertanda tangan di bawah ini : ", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("1. Nama \t: $nama_ppk", $fontStyleName, $isiParagrafStyle2);
-$section->addText("   Jabatan\t: Pejabat Pembuat Komitmen", $fontStyleName, $isiParagrafStyle2);
+$pisahin = "1. Nama \t: $nama_ppk";
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(": ",$pisahin);
+for($i=0;$i<count($pisah);$i++){
+	if($i==0){
+		$textRun->addText($pisah[$i].": ", $fontStyleName);
+	}else{
+		$textRun->addText($pisah[$i]." ", $boldFontStyleName);
+	}
+
+}
+$section->addText("    Jabatan\t: Pejabat Pembuat Komitmen", $fontStyleName, $isiParagrafStyle2);
 //tambahkan tabel
 $fancyTableStyleName = 'tandaTangan';
 $fancyTableStyle = array('cellMargin' => 0, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER, 'cellSpacing' => 50);
@@ -42,7 +54,7 @@ $BoldUFontStyle = array('size'=>10, 'name'=>'Times New Roman', 'bold'=>true, 'un
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$table->addCell(1430, $VAlignCellStyleTop)->addText("  Alamat", $fontStyle,array('spaceAfter' => 0));
+$table->addCell(1430, $VAlignCellStyleTop)->addText("    Alamat", $fontStyle,array('spaceAfter' => 0));
 $table->addCell(100, $VAlignCellStyleTop)->addText(":", $fontStyle,array('spaceAfter' => 0));
 $pihak1 = $table->addCell(null, $VAlignCellStyle);
 $pihak1->addText("$alamat_universitas", $fontStyle,array('spaceAfter' => 0));
@@ -53,12 +65,22 @@ if($nama_fakultas=="lain-lain"){
 }
 //tabel
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("2. Nama \t: $direktur_perusahaan", $fontStyleName, $isiParagrafStyle2);
-$section->addText("   Jabatan\t: Direktur", $fontStyleName, $isiParagrafStyle2);
+$pisahin = "2. Nama \t: $direktur_perusahaan";
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(": ",$pisahin);
+for($i=0;$i<count($pisah);$i++){
+	if($i==0){
+		$textRun->addText($pisah[$i].": ", $fontStyleName);
+	}else{
+		$textRun->addText($pisah[$i]." ", $boldFontStyleName);
+	}
+
+}
+$section->addText("    Jabatan\t: Direktur", $fontStyleName, $isiParagrafStyle2);
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$table->addCell(1300, $VAlignCellStyleTop)->addText("  Alamat", $fontStyle,array('spaceAfter' => 0));
+$table->addCell(1430, $VAlignCellStyleTop)->addText("    Alamat", $fontStyle,array('spaceAfter' => 0));
 $table->addCell(100, $VAlignCellStyleTop)->addText(":", $fontStyle,array('spaceAfter' => 0));
 $pihak2 = $table->addCell(null, $VAlignCellStyle);
 $pihak2->addText("$alamat_perusahaan", $fontStyle,array('spaceAfter' => 0));
@@ -79,14 +101,6 @@ $phpWord->addNumberingStyle(
                 )
             );
 //tambahkan tabel
-$fancyTableStyleName = 'tandaTangan';
-$fancyTableStyle = array('cellMargin' => 0, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER, 'cellSpacing' => 50);
-$fancyTableFirstRowStyle = array('borderBottomSize' => 18, 'borderBottomColor' => '000000', 'afterSpacing' => 0);
-$VAlignCellStyle = array('valign' => 'center');
-$VAlignCellStyleTop = array('valign' => 'top');	
-$fontStyle = array('size'=>10, 'name'=>'Times New Roman');
-$BoldUFontStyle = array('size'=>10, 'name'=>'Times New Roman', 'bold'=>true, 'underline' => 'single');
-
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
@@ -199,7 +213,9 @@ $BoldUFontStyle = array('size'=>11, 'name'=>'Times New Roman', 'bold'=>true, 'un
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$table->addCell(9000, $VAlignCellStyleTop)->addText(' PIHAK KESATU (I)', $fontStyle,array('spaceAfter' => 0));
+$pihak1 = $table->addCell(9000, $VAlignCellStyleTop);
+$pihak1->addText(' PIHAK KESATU (I)', $fontStyle,array('spaceAfter' => 0));
+$pihak1->addText(' Pejabat Pembuat Komitmen,', $fontStyle,array('spaceAfter' => 0));
 $pihak2 = $table->addCell(3000, $VAlignCellStyle);
 $pihak2->addText("PIHAK KEDUA (II)", $fontStyle,array('spaceAfter' => 0));
 $pihak2->addText("$nama_perusahaan", $fontStyle,array('spaceAfter' => 0));

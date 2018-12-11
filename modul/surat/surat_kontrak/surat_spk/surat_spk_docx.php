@@ -1,11 +1,15 @@
 <?php
 // New section
 $section = $phpWord->addSection(
-    array('paperSize' => 'Folio', 'marginLeft' => 710, 'marginRight' => 710, 'marginTop' =>3120, 'marginBottom' => 710)
+    array('paperSize' => 'Folio', 'marginLeft' => 1200, 'marginRight' => 1200, 'marginTop' =>3120, 'marginBottom' => 710)
 );
 //set font
 $JudulFontStyleName = 'JudulSPK'; //bold
 $phpWord->addFontStyle($JudulFontStyleName, array('name' => 'Times New Roman','size' => 12,'bold' => true));
+$fontStyleName = 'FontSPK'; 
+$phpWord->addFontStyle($fontStyleName, array('name' => 'Times New Roman','size' => 11));
+$boldFontStyleName = 'BoldFontSPK'; 
+$phpWord->addFontStyle($boldFontStyleName, array('name' => 'Times New Roman','size' => 11, 'bold' => true));
 
 //set paragraf
 $judulParagrafStyle = 'judulStyleBAPPH';
@@ -25,7 +29,17 @@ $section->addText("", $boldFontStyleName, $isiParagrafStyle2);
 $section->addText("", $boldFontStyleName, $isiParagrafStyle2);
 $section->addText("Pada hari ini ".$pengaturan->tanggalToNamaHari($tanggal_spk)." tanggal".$pengaturan->formatTanggal2($tanggal_spk).", kami yang bertanda tangan di bawah ini : ", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("1. Nama\t: $nama_ppk", $fontStyleName, $isiParagrafStyle2);
+$pisahin = "1. Nama \t: $nama_ppk";
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(": ",$pisahin);
+for($i=0;$i<count($pisah);$i++){
+	if($i==0){
+		$textRun->addText($pisah[$i].": ", $fontStyleName);
+	}else{
+		$textRun->addText($pisah[$i]." ", $boldFontStyleName);
+	}
+
+}
 $section->addText("   Jabatan\t: Pejabat Pembuat Komitmen", $fontStyleName, $isiParagrafStyle2);
 //tambahkan tabel
 $fancyTableStyleName = 'tandaTangan';
@@ -46,7 +60,17 @@ $pihak1->addText("$alamat_universitas", $fontStyle,array('spaceAfter' => 0));
 $pihak1->addText("Dalam hal ini bertindak untuk dan atas nama Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung yang selanjutnya disebut PIHAK KESATU (I);", $fontStyle,array('spaceAfter' => 0));
 //tabel
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("2. Nama\t: $direktur_perusahaan", $fontStyleName, $isiParagrafStyle2);
+$pisahin = "2. Nama \t: $direktur_perusahaan";
+$textRun = $section->createTextRun($isiParagrafStyle2);
+$pisah = explode(": ",$pisahin);
+for($i=0;$i<count($pisah);$i++){
+	if($i==0){
+		$textRun->addText($pisah[$i].": ", $fontStyleName);
+	}else{
+		$textRun->addText($pisah[$i]." ", $boldFontStyleName);
+	}
+
+}
 $section->addText("   Jabatan\t: Direktur", $fontStyleName, $isiParagrafStyle2);
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
@@ -59,9 +83,9 @@ $pihak2->addText("Dalam hal ini bertindak untuk dan atas nama $nama_perusahaan y
 
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 if($nama_fakultas=="lain-lain"){
-	$pisahin = "Pihak KESATU dan pihak KEDUA telah sepakat mengadakan persetujuan bahwa pihak KESATU memberikan pekerjaan kepada pihak KEDUA berupa Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun, dengan harga borongan sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)." Rupiah ) termasuk pajak, dengan ketentuan/syarat- syarat sebagai berikut :";
+	$pisahin = "Pihak KESATU dan pihak KEDUA telah sepakat mengadakan persetujuan bahwa pihak KESATU memberikan pekerjaan kepada pihak KEDUA berupa Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun, dengan harga borongan sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)." Rupiah ) termasuk pajak, dengan ketentuan/syarat-syarat sebagai berikut:";
 }else{
-	$pisahin = "Pihak KESATU dan pihak KEDUA telah sepakat mengadakan persetujuan bahwa pihak KESATU memberikan pekerjaan kepada pihak KEDUA berupa Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, dengan harga borongan sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)." Rupiah ) termasuk pajak, dengan ketentuan/syarat- syarat sebagai berikut :";
+	$pisahin = "Pihak KESATU dan pihak KEDUA telah sepakat mengadakan persetujuan bahwa pihak KESATU memberikan pekerjaan kepada pihak KEDUA berupa Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, dengan harga borongan sebesar Rp.".$pengaturan->formatUang($total_spk).".- terbilang: (".$pengaturan->penyebut($total_spk)." Rupiah ) termasuk pajak, dengan ketentuan/syarat-syarat sebagai berikut:";
 }
 $textRun = $section->createTextRun($isiParagrafStyle2);
 $pisah = explode(" ", $pisahin);
@@ -122,7 +146,7 @@ $BoldUFontStyle = array('size'=>11, 'name'=>'Times New Roman', 'bold'=>true, 'un
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$table->addCell(9000, $VAlignCellStyleTop)->addText(' PIHAK KESATU (I)', $fontStyle,array('spaceAfter' => 0));
+$table->addCell(8000, $VAlignCellStyleTop)->addText(' PIHAK KESATU (I)', $fontStyle,array('spaceAfter' => 0));
 $pihak2 = $table->addCell(3000, $VAlignCellStyle);
 $pihak2->addText("PIHAK KEDUA (II)", $fontStyle,array('spaceAfter' => 0));
 $pihak2->addText("$nama_perusahaan", $fontStyle,array('spaceAfter' => 0));

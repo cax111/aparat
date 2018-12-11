@@ -52,17 +52,17 @@ $phpWord->addNumberingStyle(
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$pphp = $table->addCell(null, $VAlignCellStyleTop);
+$pphp = $table->addCell(3000, $VAlignCellStyleTop);
 for($i=3;$i<6;$i++){
     $pphp->addListItem("$nama_panitia[$i] ", 0, $fontStyleName,'pphp', $isiParagrafStyle2);
 }
 $samaDengan = $table->addCell(100, $VAlignCellStyleTop);
 for($i=3;$i<6;$i++){
-    $samaDengan->addText(" : ", $fontStyle,array('spaceAfter' => 0));
+    $samaDengan->addText(": ", $fontStyleName, $isiParagrafStyle2);
 }
 $pphp = $table->addCell(null, $VAlignCellStyleTop);
 for($i=3;$i<6;$i++){
-    $pphp->addText("Panitia Penerima Hasil Kerja", $fontStyleName,array('spaceAfter' => 0));
+    $pphp->addText("Panitia Penerima Hasil Kerja", $fontStyleName, $isiParagrafStyle2);
 }
 //end tabel
 if($nama_fakultas=="lain-lain"){
@@ -175,7 +175,7 @@ for($i=3;$i<6;$i++){
 }
 $pphp = $table->addCell(3000, $VAlignCellStyleTop);
 for($i=3;$i<6;$i++){
-    $pphp->addText("(_______________)", $fontStyle,array('spaceAfter' => 0));
+    $pphp->addText("(__________________)", $fontStyle,array('spaceAfter' => 0));
     $pphp->addText("", $fontStyle,array('spaceAfter' => 0));
     $pphp->addText("", $fontStyle,array('spaceAfter' => 0));
 }

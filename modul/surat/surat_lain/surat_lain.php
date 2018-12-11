@@ -19,7 +19,7 @@
                   </thead>
                   <tbody>
                     <?php
-                        $queryTambahan = "INNER JOIN jurusan ON jurusan.id_jurusan=surat_kontrak.id_jurusan INNER JOIN akun_user ON akun_user.id_user=surat_kontrak.id_user";
+                        $queryTambahan = "INNER JOIN jurusan ON jurusan.id_jurusan=surat_kontrak.id_jurusan INNER JOIN akun_user ON akun_user.id_user=surat_kontrak.id_user WHERE akun_user.id_user='$_SESSION[id_user_aparat]'";
                         $tampil=$surat_kontrak->tampilKontrak($queryTambahan);
                         if(!empty($tampil)){ 
                           foreach($tampil AS $t){
@@ -39,7 +39,7 @@
                         </td>
                         <td>
                           <?php 
-                            if(!empty($t['nomor_oe'])&&!empty($t['nomor_pph'])&&!empty($t['nomor_bappsph'])&&!empty($t['waktu_ppsph'])&&!empty($t['nomor_bapph'])&&!empty($t['nomor_uknh'])&&!empty($t['nomor_baknh'])&&!empty($t['nomor_bahpl'])&&!empty($t['nomor_pp'])&&!empty($t['nomor_bapp'])&&!empty($t['nomor_spk'])&&!empty($t['nomor_sp'])&&!empty($t['nomor_bapb'])&&!empty($t['nomor_bastb'])&&!empty($t['nomor_bap'])){
+                            if(!empty($t['nomor_oe'])&&!empty($t['nomor_pph'])&&!empty($t['nomor_bappsph'])&&!empty($t['nomor_bapph'])&&!empty($t['nomor_uknh'])&&!empty($t['nomor_baknh'])&&!empty($t['nomor_bahpl'])&&!empty($t['nomor_pp'])&&!empty($t['nomor_bapp'])&&!empty($t['nomor_spk'])&&!empty($t['nomor_sp'])&&!empty($t['nomor_bapb'])&&!empty($t['nomor_bastb'])&&!empty($t['nomor_bap'])){
                               echo"<p class='label label-success'>Surat Selesai</p>
                                 </td>
                                 <td>

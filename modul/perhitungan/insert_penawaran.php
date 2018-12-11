@@ -109,7 +109,7 @@ $surat_penawaran = new penawaran;
              	<h5>Jumlah HPS</h5>
                 <input class="form-control" readonly type="text" name="" id="penawaran_total" required="required" >
                 <h5>Total Harga</h5>
-                <input class="form-control" readonly type="text" name=""  id="total" required="required" >
+                <input class="form-control" type="text" name=""  id="total" required="required" onkeyup="perhitungan()">
 
 
                 <input type="hidden" name="" value=""id="cek">
@@ -172,7 +172,15 @@ $surat_penawaran = new penawaran;
 
 
       });
+      
+      $("#total").keyup(function(){
+              var total_keseluruhan = parseInt($("#total").val());
+              var volume = $("#banyak").val();
+              var total = parseInt(total_keseluruhan / volume);
 
+            $("#penawaran_total").val(total);
+
+      });
 
 
 

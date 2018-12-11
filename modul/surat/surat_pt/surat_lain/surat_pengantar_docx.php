@@ -34,13 +34,21 @@ $section->addText("", $fontStyleName, $isiParagrafStyle);
 
 $section->addText("Kepada Yth.", $fontStyleName, $isiParagrafStyle);
 $section->addText("Pejabat Pembuat Komitmen", $fontStyleName, $isiParagrafStyle);
-$section->addText("Fakultas $nama_fakultas UIN Sunan Gunugn Djati", $fontStyleName, $isiParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("$nama_jurusan UIN Sunan Gunung Djati", $fontStyleName, $isiParagrafStyle);
+}else{
+    $section->addText("Fakultas $nama_fakultas UIN Sunan Gunung Djati", $fontStyleName, $isiParagrafStyle);
+}
 $section->addText("di", $fontStyleName, $isiParagrafStyle);
 $section->addText("Bandung", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 
 //isi word
-$section->addText("\tBersama ini kami sampaikan kebutuhan $judul jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, dengan perincian sebagai berikut:", $fontStyleName, $isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("\tBersama ini kami sampaikan kebutuhan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun, dengan perincian sebagai berikut:", $fontStyleName, $isiParagrafStyle2);
+}else{
+    $section->addText("\tBersama ini kami sampaikan kebutuhan $judul jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, dengan perincian sebagai berikut:", $fontStyleName, $isiParagrafStyle2);
+}
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 //tambahkan tabel
@@ -66,7 +74,7 @@ for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
     $namaBarang = $table->addCell(8800);
         $namaBarang->addText($nama_barang[$i]."\n", $fontStyle,array('spaceAfter' => 0));
         $namaBarang->addText("\nspesifikasi : ".$spesifikasi[$i], $spekFontStyle,array('spaceAfter' => 0));
-    $table->addCell(null)->addText($volume[$i]." Unit", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
+    $table->addCell(null)->addText($volume[$i].$satuan, $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 }
 //end tabel
 

@@ -58,6 +58,7 @@
                                                         $_POST['jurusan'],
                                                         $_SESSION['id_user_aparat'],
                                                         date('Y'),
+                                                        $_POST['tipe_pagu'],
                                                         $_POST['nama_ppk'],
                                                         $_POST['nip_ppk'],
                                                         $_POST['nama_ppb'],

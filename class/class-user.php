@@ -26,13 +26,15 @@
 		    }
 		}
 
-		function ubahUser($nama_perusahaan,$nama_user,$alamat_perusahaan,$npwp,$id_user){
-			$update=parent::koneksi()->prepare("UPDATE akun_user SET nama_perusahaan=?, nama_user=?, alamat_perusahaan=?, npwp=? WHERE id_user=?");
+		function ubahUser($nama_perusahaan,$nama_user,$alamat_perusahaan,$npwp,$no_telp,$email,$id_user){
+			$update=parent::koneksi()->prepare("UPDATE akun_user SET nama_perusahaan=?, nama_user=?, alamat_perusahaan=?, npwp=?, no_telp=?, email=? WHERE id_user=?");
 		    $update->BindParam(1,$nama_perusahaan);
 		    $update->BindParam(2,$nama_user);
 		    $update->BindParam(3,$alamat_perusahaan);
 		    $update->BindParam(4,$npwp);
-		    $update->BindParam(5,$id_user);
+		    $update->BindParam(5,$no_telp);
+		    $update->BindParam(6,$email);
+		    $update->BindParam(7,$id_user);
 		    $update->execute();
 		    if($update->RowCount()==0){
 		    	return "Input Data Gagal";

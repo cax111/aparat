@@ -202,7 +202,7 @@ for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
 
 $section->addText('', $fontStyleName, $isiParagrafStyle2);
 $section->addListItem('PENUTUP', 0, $boldFontStyleName,'multilevel');
-if(){
+if($nama_fakultas=="lain-lain"){
     $section->addText("Demikian Kerangka Acuan Kerja ini disusun sebagai landasan dalam $judul $nama_jurusan UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);
 }else{
     $section->addText("Demikian Kerangka Acuan Kerja ini disusun sebagai landasan dalam $judul jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung.", $fontStyleName, $paragrafStyle);

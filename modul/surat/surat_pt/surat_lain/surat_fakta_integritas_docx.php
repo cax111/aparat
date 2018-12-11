@@ -40,8 +40,11 @@ $section->addText("Alamat\t\t\t : $alamat_perusahaan", $fontStyleName, $isiParag
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 
 //isi word
+if($nama_fakultas=="lain-lain"){
+$section->addText("Dalam rangka Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun , dengan ini menyatakan bahwa : ", $fontStyleName, $isiParagrafStyle2);
+}else{
 $section->addText("Dalam rangka Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas  UIN Sunan Gunung Djati Bandung Tahun $tahun , dengan ini menyatakan bahwa : ", $fontStyleName, $isiParagrafStyle2);
-
+}
 //list
 $phpWord->addNumberingStyle(
             	'multilevel',

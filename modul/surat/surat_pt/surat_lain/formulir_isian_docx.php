@@ -36,9 +36,15 @@ $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+$section->addText("PEKERJAAN ".strtoupper($judul), $boldFontStyleName, $judulParagrafStyle);
+$section->addText(strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
+$section->addText("UIN SUNAN GUNUNG DJATI TAHUN ".$tahun, $boldFontStyleName, $judulParagrafStyle);
+}else{
 $section->addText("PEKERJAAN ".strtoupper($judul)." JURUSAN ".strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
 $section->addText("FAKULTAS ".strtoupper($nama_fakultas), $boldFontStyleName, $judulParagrafStyle);
 $section->addText("UIN SUNAN GUNUNG DJATI TAHUN ".$tahun, $boldFontStyleName, $judulParagrafStyle);
+}
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $boldFontStyleName, $judulParagrafStyle);

@@ -28,7 +28,6 @@ $phpWord->addParagraphStyle($listTTDBAPPH, array('alignment' => \PhpOffice\PhpWo
 //mulai isi word -- 
 
 $section->addText("Kwitansi", $JudulFontStyleName, $isiParagrafStyle);
-$section->addText("Nomor\t : ", $fontStyleName, $isiParagrafStyle);
 $section->addText("NPWP\t : $npwp_perusahaan".$npwp, $fontStyleName, $isiParagrafStyle);
 $section->addText($nama_perusahaan, $fontStyleName, $isiParagrafStyle);
 $section->addText("No Rek. BRI. 0354-01-000890-56-1", $norekFontStyleName, $isiParagrafStyle);

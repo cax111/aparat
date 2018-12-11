@@ -55,18 +55,21 @@ $section->addListItem('Kegiatan Usaha Tidak Sedang dihentikan', 0, $fontStyleNam
 $section->addListItem('Tidak sedang menjalani sanksi pidana', 0, $fontStyleName);
 
 //endlist
+if($nama_fakultas=="lain-lain"){
+$section->addText("Demikian Surat Pernyataan Ini Kami Buat Dengan Sadar Dan Sebenarnya Serta Agar Dapat Dipergunakan Sebagai Kelengkapan Dalam Persyaratan Dokumen Kualifikasi Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun", $fontStyleName, $isiParagrafStyle2);
+}else{
 $section->addText("Demikian Surat Pernyataan Ini Kami Buat Dengan Sadar Dan Sebenarnya Serta Agar Dapat Dipergunakan Sebagai Kelengkapan Dalam Persyaratan Dokumen Kualifikasi Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun", $fontStyleName, $isiParagrafStyle2);
-
+}
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t Bandung, $tanggal_penawaran_pph", $fontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t $nama_perusahaan", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t Bandung, $tanggal_penawaran_pph", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t $nama_perusahaan", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t matrai", $IFontStyleName, $isiParagrafStyle);
+$section->addText("\t\t\t\t\t\t\t\t\t\t matrai", $IFontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
-$pisahin = "\t\t\t\t\t\t\t\t\t\t\t ($direktur_perusahaan)";
+$pisahin = "\t\t\t\t\t\t\t\t\t\t ($direktur_perusahaan)";
 $textRun = $section->createTextRun($isiParagrafStyle);
 $pisah = explode(" ",$pisahin);
 for($i=0;$i<count($pisah);$i++){
@@ -77,5 +80,5 @@ for($i=0;$i<count($pisah);$i++){
 	}
 
 }
-$section->addText("\t\t\t\t\t\t\t\t\t\t\t Direktur", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\t\t Direktur", $fontStyleName, $isiParagrafStyle2);
 ?>

@@ -22,35 +22,58 @@ $isiParagrafStyle = 'isiStylePPH';
 $phpWord->addParagraphStyle($isiParagrafStyle, array('spaceAfter' => 0));
 $isiParagrafStyle2 = 'isi2StylePPH';
 $phpWord->addParagraphStyle($isiParagrafStyle2, array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::BOTH,'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0),'line-height' => 1.5));
+$isiParagrafStyle3 = 'isi3StylePPH';
+$phpWord->addParagraphStyle($isiParagrafStyle3, array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::BOTH,'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0),'line-height' => 1.5,'indentation' => array('left' => 1500)));
 
-//mulai isi word -- 
-$section->addText("Nomor \t\t: $nomor_pph \t\t\tBandung, $tanggal_pph", $fontStyleName, $isiParagrafStyle);
-$section->addText("Lampiran \t: -", $fontStyleName, $isiParagrafStyle);
-$section->addText("Perihal \t\t: Permintaan Penawaran Harga", $fontStyleName, $isiParagrafStyle);
-$section->addText("", $fontStyleName, $isiParagrafStyle);
+//mulai isi word --
 
-$section->addText("\t\t\t\t\t\t\t\t\tKepada Yth.", $fontStyleName, $isiParagrafStyle);
-$section->addText("\t\t\t\t\t\t\t\t\t$nama_perusahaan", $boldFontStyleName, $isiParagrafStyle);
-$section->addText("\t\t\t\t\t\t\t\t\t$alamat_perusahaan", $boldFontStyleName, $isiParagrafStyle);
+//tambahkan tabel
+
+$fancyTableStyleName = 'Fancy TablePPHHeader';
+$fancyTableStyle = array('cellMargin' => 80, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::END, 'cellSpacing' => 50);
+$fancyTableFirstRowStyle = array('afterSpacing' => 0);
+$VAlignCellStyle = array('valign' => 'top');
+
+$fontStyle = array('size'=>8, 'name'=>'Times New Roman');
+$TfontStyle = array('bold'=>true, 'size'=>8, 'name' => 'Times New Roman');
+$spekFontStyle = array('bold'=>true, 'size'=>6, 'name' => 'Times New Roman');
+
+$phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
+$table = $section->addTable($fancyTableStyleName);
+$table->addRow();
+$a = $table->addCell(6000, $VAlignCellStyle);
+$a->addText("Nomor \t\t: $nomor_pph", $fontStyleName, $isiParagrafStyle);
+$a->addText("Lampiran \t: -", $fontStyleName, $isiParagrafStyle);
+$a->addText("Perihal \t\t: Permintaan Penawaran Harga", $fontStyleName, $isiParagrafStyle);
+$a->addText("", $fontStyleName, $isiParagrafStyle);
+$b = $table->addCell(null, $VAlignCellStyle);
+$b->addText("Bandung, $tanggal_pph", $fontStyleName, $isiParagrafStyle);
+$b->addText("", $fontStyleName, $isiParagrafStyle);
+$b->addText("", $fontStyleName, $isiParagrafStyle);
+$b->addText("", $fontStyleName, $isiParagrafStyle);
+$b->addText("Kepada Yth.", $fontStyleName, $isiParagrafStyle);
+$b->addText("Direktur $nama_perusahaan", $boldFontStyleName, $isiParagrafStyle);
+$b->addText("$alamat_perusahaan", $boldFontStyleName, $isiParagrafStyle);
 
 //isi word
-$section->addText("Assalamu'alaikum Wr. Wb.", $IFontStyleName, $isiParagrafStyle);
+$section->addText("", $IFontStyleName, $isiParagrafStyle);
+$section->addText("Assalamu'alaikum Wr. Wb.", $IFontStyleName, $isiParagrafStyle3);
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 if($nama_fakultas=="lain-lain"){
-    $section->addText("\tMemperhatikan ".$tipe_pagu." UIN Sunan Gunung Djati Bandung Tahun Anggaran $tahun, bersama ini kami mengundang saudara untuk bekerjasama dalam hal Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun.", $fontStyleName, $isiParagrafStyle2);
-    $section->addText("\tSebagai bahan pertimbangan saudara, berikut ini uraian daftar kebutuhan Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun :", $fontStyleName,$isiParagrafStyle2);
+    $section->addText("\tMemperhatikan ".$tipe_pagu." UIN Sunan Gunung Djati Bandung Tahun Anggaran $tahun, bersama ini kami mengundang saudara untuk bekerjasama dalam hal Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung Tahun $tahun.", $fontStyleName, $isiParagrafStyle3);
+    $section->addText("\tSebagai bahan pertimbangan saudara, berikut ini uraian daftar kebutuhan Pekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun :", $fontStyleName,$isiParagrafStyle3);
 
 }else{
-    $section->addText("\tMemperhatikan ".$tipe_pagu." UIN Sunan Gunung Djati Bandung Tahun Anggaran $tahun, bersama ini kami mengundang saudara untuk bekerjasama dalam hal Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun.", $fontStyleName, $isiParagrafStyle2);
-    $section->addText("\tSebagai bahan pertimbangan saudara, berikut ini uraian daftar kebutuhan Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun :", $fontStyleName,$isiParagrafStyle2);
+    $section->addText("\tMemperhatikan ".$tipe_pagu." UIN Sunan Gunung Djati Bandung Tahun Anggaran $tahun, bersama ini kami mengundang saudara untuk bekerjasama dalam hal Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung Tahun $tahun.", $fontStyleName, $isiParagrafStyle3);
+    $section->addText("\tSebagai bahan pertimbangan saudara, berikut ini uraian daftar kebutuhan Pekerjaan $judul Jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun :", $fontStyleName,$isiParagrafStyle3);
 
 }
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 
 //tambahkan tabel
 
-$fancyTableStyleName = 'Fancy Table';
-$fancyTableStyle = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER, 'cellSpacing' => 50);
+$fancyTableStyleName = 'Fancy TablePPH';
+$fancyTableStyle = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80, 'alignment' => \PhpOffice\PhpWord\SimpleType\JcTable::END, 'cellSpacing' => 50);
 $fancyTableFirstRowStyle = array('borderBottomSize' => 18, 'borderBottomColor' => '000000', 'afterSpacing' => 0);
 $VAlignCellStyle = array('valign' => 'center');
 
@@ -62,7 +85,7 @@ $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirst
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
 $table->addCell(500, $VAlignCellStyle)->addText('No', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(8000, $VAlignCellStyle)->addText('Nama Barang', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+$table->addCell(6500, $VAlignCellStyle)->addText('Nama Barang', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(1000, $VAlignCellStyle)->addText('Vol', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(1000, $VAlignCellStyle)->addText('Satuan', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
@@ -78,13 +101,13 @@ for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
 }
 //end tabel
 $section->addText("");
-$section->addText("Adapun ketentuannya adalah sebagai berikut :", $fontStyleName, $isiParagrafStyle);
+$section->addText("Adapun ketentuannya adalah sebagai berikut :", $fontStyleName, $isiParagrafStyle3);
 
 //buat list item number
 $phpWord->addNumberingStyle(
             	'multilevel',
             	array('type' => 'multilevel', 'levels' => array(
-                    array('format' => 'decimal', 'text' => '%1.', 'left' => 720, 'hanging' => 360, 'tabPos' => 720)                    
+                    array('format' => 'decimal', 'text' => '%1.', 'left' => 1900, 'hanging' => 360, 'tabPos' => 1500)                    
                 	)
             	)
         	);
@@ -92,16 +115,23 @@ $section->addListItem('Penawaran tersebut selambat-lambatnya harus sudah kami te
 $section->addListItem('Harga Penawaran sudah termasuk keuntungan perusahaan dan pajak-pajak yang berlaku.', 0, $fontStyleName,'multilevel');
 //end list item
 
-$section->addText("\tDemikian penawaran ini kami sampaikan, agar menjadi maklum.", $fontStyleName, $isiParagrafStyle2);
-$section->addText("Wassalamu'alaikum Wr. Wb.", $IFontStyleName, $isiParagrafStyle2);
+$section->addText("\tDemikian penawaran ini kami sampaikan, agar menjadi maklum.", $fontStyleName, $isiParagrafStyle3);
+$section->addText("Wassalamu'alaikum Wr. Wb.", $IFontStyleName, $isiParagrafStyle3);
 $section->addText("", $IFontStyleName, $isiParagrafStyle2);
-$section->addText("\t\t\t\t\t\t\t\t\tPokja Pengadaan Barang/Jasa", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\tPokja Pengadaan Barang/Jasa", $fontStyleName, $isiParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("\t\t\t\t\t\t\t\t\t$nama_jurusan", $fontStyleName, $isiParagrafStyle);
+}else{
+    $section->addText("\t\t\t\t\t\t\t\t\tFakultas $nama_fakultas", $fontStyleName, $isiParagrafStyle);
+}
+$section->addText("\t\t\t\t\t\t\t\t\tUIN Sunan Gunung Djati Bandung", $fontStyleName, $isiParagrafStyle);
+$section->addText("\t\t\t\t\t\t\t\t\tKetua,", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 $pisahin = "\t\t\t\t\t\t\t\t\t $nama_ppb";
-$textRun = $section->createTextRun($isiParagrafStyle2);
+$textRun = $section->createTextRun($isiParagrafStyle);
 $pisah = explode(" ",$pisahin);
 for($i=0;$i<count($pisah);$i++){
 	if($i==0){
@@ -111,5 +141,5 @@ for($i=0;$i<count($pisah);$i++){
 	}
 
 }
-$section->addText("\t\t\t\t\t\t\t\t\tNIP. $nip_ppb", $fontStyleName, $isiParagrafStyle2);
+$section->addText("\t\t\t\t\t\t\t\t\tNIP. $nip_ppb", $fontStyleName, $isiParagrafStyle);
 ?>

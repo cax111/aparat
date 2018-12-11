@@ -17,14 +17,19 @@
       <input class="form-control" type="text" name="alamat_perusahaan" value="<?=$t['alamat_perusahaan']?>" required="required" >
       <h5>NPWP Perusahaan</h5>
       <input class="form-control" type="text" name="npwp" value="<?=$t['npwp']?>" required="required" >
+      <h5>No. Telpon Perusahaan</h5>
+      <input class="form-control" type="text" name="no_telp" value="<?=$t['no_telp']?>" required="required" >
+      <h5>Email Perusahaan</h5>
+      <input class="form-control" type="text" name="email" value="<?=$t['email']?>" required="required" >
       <br/>
       <br/>
-      <input class="form-control btn btn-success" type="submit" name="ok" value="Submit">
+      <a href="index.php?page_pengguna=profil-pengguna" class="btn btn-warning pull-left">Kembali</a>
+      <input class="btn btn-success pull-right" type="submit" name="ok" value="Submit">
     </div> 
     <?php
     }
       if(isset($_POST['ok'])){
-        $status = $user->ubahUser($_POST['nama_perusahaan'],$_POST['nama_pemilik'],$_POST['alamat_perusahaan'],$_POST['npwp'],$_GET['id']);      
+        $status = $user->ubahUser($_POST['nama_perusahaan'],$_POST['nama_pemilik'],$_POST['alamat_perusahaan'],$_POST['npwp'],$_POST['no_telp'],$_POST['email'],$_GET['id']);      
         if($status=="Input Data Gagal."){
     ?>
           <div class="box-footer clearfix label-danger">
@@ -37,6 +42,7 @@
     ?>         
   </div>
 </form>
+
 <script src="build/js/jquery.js"></script>
 <!-- animasi form -->
 <script>

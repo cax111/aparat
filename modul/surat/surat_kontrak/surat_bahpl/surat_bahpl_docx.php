@@ -43,14 +43,22 @@ $spekFontStyle = array('bold'=>true, 'size'=>8, 'name' => 'Times New Roman');
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$table->addCell(3700,$VMergeStart)->addText("JURUSAN ".strtoupper($nama_jurusan)."\nFAKULTAS ".strtoupper($nama_fakultas)."\n".strtoupper($nama_universitas)."\n\nBANDUNG", $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+if($nama_fakultas=="lain-lain"){
+$jurus = $table->addCell(3700,$VMergeStart);
+$jurus->addText(strtoupper($nama_jurusan)."\n".strtoupper($nama_universitas), $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+$jurus->addText("BANDUNG", $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+}else{
+$jurus = $table->addCell(3700,$VMergeStart);
+$jurus->addText("JURUSAN ".strtoupper($nama_jurusan)."\nFAKULTAS ".strtoupper($nama_fakultas)."\n".strtoupper($nama_universitas), $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+$jurus->addText("BANDUNG", $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+}
 $table->addCell(null, $VAlignCellStyle)->addText('BERITA ACARA HASIL PENGADAAN LANGSUNG', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));   
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(null,$VAlignCellStyle)->addText("Nomor\t\t:     $nomor_bahpl", $fontStyle, array('spaceAfter' => 0));
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(null,$VAlignCellStyle)->addText("Tanggal\t\t:     ".$pengaturan->formatTanggal($tanggal_baknh), $fontStyle, array('spaceAfter' => 0));
+$table->addCell(null,$VAlignCellStyle)->addText("Tanggal\t\t:     ".$pengaturan->formatTanggal($tanggal_bahpl), $fontStyle, array('spaceAfter' => 0));
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $cell = $table->addCell(null,$VAlignCellStyle);
@@ -66,9 +74,9 @@ if($nama_fakultas=="lain-lain"){
 
 //isi word
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
-$hari_baknh = $pengaturan->tanggalToNamaHari($tanggal_baknh);
-$tanggal_huruf_baknh = $pengaturan->formatTanggal2($tanggal_baknh);
-$section->addText("Pada hari $hari_baknh Tanggal$tanggal_huruf_baknh, kami yang bertanda tangan di bawah ini Pokja Pengadaanan Langsung pengadaan barang/jasa telah mengadakan rapat hasil Pengadaanan langsung pekerjaan tersebut di atas.", $fontStyleName, $isiParagrafStyle2);
+$hari_bahpl = $pengaturan->tanggalToNamaHari($tanggal_bahpl);
+$tanggal_huruf_bahpl = $pengaturan->formatTanggal2($tanggal_bahpl);
+$section->addText("Pada hari $hari_bahpl Tanggal$tanggal_huruf_bahpl, kami yang bertanda tangan di bawah ini Pokja Pengadaanan Langsung pengadaan barang/jasa telah mengadakan rapat hasil Pengadaanan langsung pekerjaan tersebut di atas.", $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 $section->addText("Rapat dipimpin oleh\t: $nama_ppb", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Jabatan\t\t\t: Pokja Pengadaan Barang/Jasa", $fontStyleName, $isiParagrafStyle2);
@@ -87,7 +95,6 @@ $phpWord->addNumberingStyle(
 //buat table
 $fancyTableStyleName = 'header BAPPSPH2';
 $fancyTableStyle = array('borderSize' => 0, 'borderColor' => 'ffffff', 'cellMargin' => 0);
-$section->addListItem('Yang dihadiri oleh anggota tim peneliti harga : ', 0, $fontStyleName,'multilevel1', $isiParagrafStyle2);
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table2 = $section->addTable($fancyTableStyleName);
 for($i=0;$i<3;$i++){
@@ -151,13 +158,13 @@ $phpWord->addNumberingStyle(
             );
 $namaPanitia = $table->addCell(null);
 $namaPanitia->addListItem("$nama_panitia[0]", 0, $fontStyleName,'multilevelLHKNH2', $isiParagrafStyle2);
-$namaPanitia->addListItem("$jabatan_panitia[0]", 1, $fontStyleName,'multilevelLHKNH2', $isiParagrafStyle2);
+$namaPanitia->addText("       $jabatan_panitia[0]", $fontStyle, $isiParagrafStyle2);
 $table->addCell()->addText(".....................................", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $table->addRow();
 $table->addCell(3000)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $namaPanitia = $table->addCell(null);
 $namaPanitia->addListItem("$nama_panitia[1]", 0, $fontStyleName,'multilevelLHKNH2', $isiParagrafStyle2);
-$namaPanitia->addListItem("$jabatan_panitia[1]", 1, $fontStyleName,'multilevelLHKNH2', $isiParagrafStyle2);
+$namaPanitia->addText("       $jabatan_panitia[1]", $fontStyle, $isiParagrafStyle2);
 $table->addCell()->addText(".....................................", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $table->addRow();
     $tppb = $table->addCell(3000);
@@ -165,7 +172,7 @@ $table->addRow();
     $tppb->addText("NIP. $nip_ppb", $fontStyle,array('spaceAfter' => 0));
 $namaPanitia = $table->addCell(null);
 $namaPanitia->addListItem("$nama_panitia[2]", 0, $fontStyleName,'multilevelLHKNH2', $isiParagrafStyle2);
-$namaPanitia->addListItem("$jabatan_panitia[2]", 1, $fontStyleName,'multilevelLHKNH2', $isiParagrafStyle2);
+$namaPanitia->addText("       $jabatan_panitia[2]", $fontStyle, $isiParagrafStyle2);
 $table->addCell()->addText(".....................................", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 //end tabel
 ?>

@@ -29,7 +29,11 @@ $phpWord->addParagraphStyle($isiParagrafStyle2, array('alignment' => \PhpOffice\
 
 //mulai isi word -- 
 $section->addText("SPESIFIKASI TEKNIS PEKERJAAN ".strtoupper($judul), $boldFontStyleName, $judulParagrafStyle);
-$section->addText("JURUSAN ".strtoupper($nama_jurusan)."FAKULTAS ".strtoupper($nama_fakultas), $boldFontStyleName, $judulParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+$section->addText(strtoupper($nama_jurusan), $boldFontStyleName, $judulParagrafStyle);
+}else{
+$section->addText("JURUSAN ".strtoupper($nama_jurusan)." FAKULTAS ".strtoupper($nama_fakultas), $boldFontStyleName, $judulParagrafStyle);
+}
 $section->addText("UIN SUNAN GUNUNG DJATI BANDUNG TAHUN ".strtoupper($tahun), $boldFontStyleName, $judulParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 //tambahkan tabel
@@ -62,6 +66,8 @@ for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
 //end tabel
 
 //list
+
+$section->addText("",$STFontStyleName,$isiParagrafStyle);
 $phpWord->addNumberingStyle(
             	'multilevel1',
             	array('type' => 'multilevel', 'levels' => array(

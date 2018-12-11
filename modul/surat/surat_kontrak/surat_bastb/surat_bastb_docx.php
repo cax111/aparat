@@ -1,7 +1,7 @@
 <?php
 // New section
 $section = $phpWord->addSection(
-    array('paperSize' => 'Folio', 'marginLeft' => 710, 'marginRight' => 710, 'marginTop' =>3120, 'marginBottom' => 710)
+    array('paperSize' => 'Folio', 'marginLeft' => 1350, 'marginRight' => 1350, 'marginTop' =>3120, 'marginBottom' => 710)
 );
 //set font
 $fontStyleName = 'normalBASTB'; //normalBASTB

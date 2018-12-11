@@ -18,7 +18,7 @@
                   </thead>
                   <tbody>
                     <?php
-                        $queryTambahan = "INNER JOIN jurusan ON jurusan.id_jurusan=surat_kontrak.id_jurusan INNER JOIN akun_user ON akun_user.id_user=surat_kontrak.id_user";
+                        $queryTambahan = "INNER JOIN jurusan ON jurusan.id_jurusan=surat_kontrak.id_jurusan INNER JOIN akun_user ON akun_user.id_user=surat_kontrak.id_user  WHERE akun_user.id_user='$_SESSION[id_user_aparat]'";
                         $tampil=$surat_kontrak->tampilKontrak($queryTambahan);
                         if(!empty($tampil)){
                           foreach($tampil AS $t){

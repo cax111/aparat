@@ -26,7 +26,7 @@ if($nama_fakultas=="lain-lain"){
 }
 $section->addText($isi, $fontStyleName, $isiParagrafStyle2);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
-$section->addText("Yang dihadiri oleh anggota tim peneliti harga : ", $UFontStyleName, $isiParagrafStyle2);
+$section->addText("Yang dihadiri oleh anggota tim : ", $UFontStyleName, $isiParagrafStyle2);
 //list panitia
 $phpWord->addNumberingStyle(
                 'panitia_bapph',
@@ -62,7 +62,7 @@ $section->addListItem("PMK Tentang Standar Biaya Masukan Th. Anggaran 2018.", 0,
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Pengajuan harga penawaran dari perusahaan/rekanan :", $UFontStyleName, $isiParagrafStyle2);
 
-$pisahin = $nama_perusahaan.", sebesar Rp.".$pengaturan->formatUang($total_penawaran).".- Terbilang (".$pengaturan->penyebut($total_penawaran)."Rupiah )";
+$pisahin = $nama_perusahaan.", sebesar Rp.".$pengaturan->formatUang($total_penawaran).".- Terbilang (".$pengaturan->penyebut($total_penawaran)." Rupiah )";
 $textRun = $section->createTextRun($isiParagrafStyle2);
 $pisah = explode(" ", $pisahin);
 $ambil1=null;
@@ -86,7 +86,7 @@ for($i=0;$i<count($pisah);$i++){
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Hasil Penelitian/Evaluasi :", $UFontStyleName, $isiParagrafStyle2);
 
-$pisahin = "Berdasarkan hasil evaluasi yang kami lakukan dan telah memperhatikan ketentuan dan peraturan yang berlaku, kami berpendapat bahwa penawaran dari ".$nama_perusahaan." yang beralamat di ".$alamat_perusahaan.", sebesar Rp.".$pengaturan->formatUang($total_penawaran)." (".$pengaturan->penyebut($total_penawaran)."Rupiah ) termasuk pajak, dapat dilakukan negosiasi harga.";
+$pisahin = "Berdasarkan hasil evaluasi yang kami lakukan dan telah memperhatikan ketentuan dan peraturan yang berlaku, kami berpendapat bahwa penawaran dari ".$nama_perusahaan." yang beralamat di ".$alamat_perusahaan.", sebesar Rp.".$pengaturan->formatUang($total_penawaran)." (".$pengaturan->penyebut($total_penawaran)." Rupiah ) termasuk pajak, dapat dilakukan negosiasi harga.";
 $textRun = $section->createTextRun($isiParagrafStyle2);
 $pisah = explode(" ", $pisahin);
 $ambil1=null;
@@ -139,11 +139,13 @@ $table->addRow();
 $table->addCell(5000)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $namaPanitia = $table->addCell(null);
 $namaPanitia->addListItem("$nama_panitia[0]", 0, $fontStyleName,'panitia_bapph_ttd', $listTTDBAPPH);
+$namaPanitia->addText("");
 $table->addCell()->addText("(___________________)", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $table->addRow();
 $table->addCell(5000)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $namaPanitia = $table->addCell(null);
 $namaPanitia->addListItem("$nama_panitia[1]", 0, $fontStyleName,'panitia_bapph_ttd', $listTTDBAPPH);
+$namaPanitia->addText("");
 $table->addCell()->addText("(___________________)", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 $table->addRow();
     $tppb = $table->addCell(5000);
@@ -151,6 +153,7 @@ $table->addRow();
     $tppb->addText("", $fontStyle,array('spaceAfter' => 0));
 $namaPanitia = $table->addCell(null);
 $namaPanitia->addListItem("$nama_panitia[2]", 0, $fontStyleName,'panitia_bapph_ttd', $listTTDBAPPH);
+$namaPanitia->addText("");
 $table->addCell()->addText("(___________________).", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
 
 ?>

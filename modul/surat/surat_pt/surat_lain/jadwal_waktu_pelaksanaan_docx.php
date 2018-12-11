@@ -27,7 +27,11 @@ $phpWord->addParagraphStyle($isiParagrafStyle2, array('alignment' => \PhpOffice\
 
 //mulai isi word -- 
 $section->addText("JADWAL WAKTU PELAKSANAAN ", $boldFontStyleName, $judulParagrafStyle);
-$section->addText("PEKERJAAN ".strtoupper($judul)." JURUSAN ".strtoupper($nama_jurusan)."FAKULTAS ".strtoupper($nama_fakultas)." UIN SUNAN GUNUNG DJATI BANDUNG TAHUN ".strtoupper($tahun), $boldFontStyleName, $judulParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+$section->addText("PEKERJAAN ".strtoupper($judul)." ".strtoupper($nama_jurusan)." UIN SUNAN GUNUNG DJATI BANDUNG TAHUN ".strtoupper($tahun), $boldFontStyleName, $judulParagrafStyle);
+}else{
+$section->addText("PEKERJAAN ".strtoupper($judul)." JURUSAN ".strtoupper($nama_jurusan)." FAKULTAS ".strtoupper($nama_fakultas)." UIN SUNAN GUNUNG DJATI BANDUNG TAHUN ".strtoupper($tahun), $boldFontStyleName, $judulParagrafStyle);
+}
 $section->addText("", $fontStyleName, $isiParagrafStyle);
 
 //tambahkan tabel

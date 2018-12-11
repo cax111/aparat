@@ -1,7 +1,7 @@
 <?php
 // New section
 $section = $phpWord->addSection(
-    array('paperSize' => 'Folio', 'marginLeft' => 710, 'marginRight' => 710, 'marginTop' =>3120, 'marginBottom' => 710)
+    array('paperSize' => 'Folio', 'marginLeft' => 1200, 'marginRight' => 1200, 'marginTop' =>3120, 'marginBottom' => 710)
 );
 //set font
 $JudulFontStyleName = 'Judulsp'; //bold
@@ -44,6 +44,7 @@ $section->addText("Nama CV\t: $nama_perusahaan", $fontStyleName, $isiParagrafSty
 $section->addText("Alamat CV\t: $alamat_perusahaan", $fontStyleName, $isiParagrafStyle2);
 $section->addText("yang dalam hal ini diwakili oleh: Direktur ", $fontStyleName, $isiParagrafStyle2);
 $section->addText("selanjutnya disebut sebagai Penyedia Barang;", $fontStyleName, $isiParagrafStyle2);
+$section->addText("", $fontStyleName, $isiParagrafStyle2);
 $section->addText("Untuk mengirimkan barang dengan memperhatikan ketentuan-ketentuan sebagai berikut :", $fontStyleName, $isiParagrafStyle2);
 
 //list Ketentuan SP
@@ -98,7 +99,7 @@ $section->addText("", $boldFontStyleName, $isiParagrafStyle2);
 $tanggalTempo = $pengaturan->formatTanggal($pengaturan->penjumlahanTanggal($tanggal_spk,7));
 $section->addListItem("Tanggal barang diterima : Maksimal tanggal {$tanggalTempo};", 0, $fontStyleName,'ketentuan_sp', $isiParagrafStyle2);
 $section->addListItem("Syarat-syarat pekerjaan: sesuai dengan persyaratan dan ketentuan Kontrak;", 0, $fontStyleName,'ketentuan_sp', $isiParagrafStyle2);
-$section->addListItem("Waktu penyelesaian: selama 07 (tujuh) hari kalender dan pekerjaan harus sudah selesai pada tanggal 27 Februari 2018.", 0, $fontStyleName,'ketentuan_sp', $isiParagrafStyle2);
+$section->addListItem("Waktu penyelesaian: selama 07 (tujuh) hari kalender dan pekerjaan harus sudah selesai pada tanggal $tanggalTempo.", 0, $fontStyleName,'ketentuan_sp', $isiParagrafStyle2);
 $section->addListItem("Alamat pengiriman barang : $alamat_universitas", 0, $fontStyleName,'ketentuan_sp', $isiParagrafStyle2);
 $section->addListItem("Denda: Terhadap setiap hari keterlambatan penyelesaian pekerjaan Penyedia Jasa akan dikenakan Denda Keterlambatan sebesar 1/1000 (satu per seribu) dari Nilai Kontrak atau bagian tertentu dari Nilai Kontrak sebelum PPN sesuai dengan persyaratan dan ketentuan Kontrak.", 0, $fontStyleName,'ketentuan_sp', $isiParagrafStyle2);
 //end list syarat spk
@@ -142,7 +143,7 @@ $pihak1->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
 $pihak1->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
 $pihak1->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
 $pihak1->addText("", $BoldUFontStyle,array('spaceAfter' => 0));
-$pihak1->addText("$nama_ppk", $BoldFontStyle,array('spaceAfter' => 0, 'align' => 'right'));
+$pihak1->addText("$nama_ppk", $BoldUFontStyle,array('spaceAfter' => 0, 'align' => 'right'));
 $pihak1->addText("NIP. $nip_ppk", $fontStyle,array('spaceAfter' => 0, 'align' => 'right'));
 //end tabel
 ?>

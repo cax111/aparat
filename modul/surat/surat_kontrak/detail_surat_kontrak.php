@@ -501,6 +501,7 @@
         <input type="hidden" name="nomor_baknh" value="<?php echo $t['nomor_baknh'] ?>">
         <input type="hidden" name="tanggal_baknh" value="<?php echo $t['tanggal_baknh'] ?>">
         <input type="hidden" name="nomor_bahpl" value="<?php echo $t['nomor_bahpl'] ?>">
+        <input type="hidden" name="tanggal_bahpl" value="<?php echo $t['tanggal_bahpl'] ?>">
         <input type="hidden" name="nomor_pp" value="<?php echo $t['nomor_pp'] ?>">
         <input type="hidden" name="tanggal_pp" value="<?php echo $t['tanggal_pp'] ?>">
         <input type="hidden" name="tanggal_spk_pp" value="<?php echo $t['tanggal_spk_pp'] ?>">

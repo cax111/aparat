@@ -34,13 +34,21 @@ $section->addText("", $fontStyleName, $isiParagrafStyle);
 
 $section->addText("Kepada Yth.", $fontStyleName, $isiParagrafStyle);
 $section->addText("Pejabat Pembuat Komitmen", $fontStyleName, $isiParagrafStyle);
-$section->addText("Fakultas $nama_fakultas UIN Sunan Gunugn Djati", $fontStyleName, $isiParagrafStyle);
+if($nama_fakultas=="lain-lain"){
+    $section->addText("$nama_jurusan UIN Sunan Gunung Djati", $fontStyleName, $isiParagrafStyle);
+}else{
+    $section->addText("Fakultas $nama_fakultas UIN Sunan Gunung Djati", $fontStyleName, $isiParagrafStyle);
+}
 $section->addText("di", $fontStyleName, $isiParagrafStyle);
 $section->addText("Bandung", $fontStyleName, $isiParagrafStyle);
 $section->addText("", $fontStyleName, $isiParagrafStyle2);
 
 //isi word
-$section->addText("\tPekerjaan $judul jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, dengan perincian sebagai berikut:", $fontStyleName, $isiParagrafStyle2);
+if($nama_fakultas=="lain-lain"){
+	$section->addText("\tPekerjaan $judul $nama_jurusan UIN Sunan Gunung Djati Bandung tahun $tahun, dengan perincian sebagai berikut:", $fontStyleName, $isiParagrafStyle2);
+}else{
+	$section->addText("\tPekerjaan $judul jurusan $nama_jurusan Fakultas $nama_fakultas UIN Sunan Gunung Djati Bandung tahun $tahun, dengan perincian sebagai berikut:", $fontStyleName, $isiParagrafStyle2);
+}
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 $section->addText("", $IFontStyleName, $isiParagrafStyle);
 //tambahkan tabel
@@ -58,7 +66,7 @@ $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirst
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow(400);
 $table->addCell(null,$VAlignCellStyle)->addText('No',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
-$table->addCell(3500,$VAlignCellStyle)->addText('Nama Barang',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+$table->addCell(6000,$VAlignCellStyle)->addText('Nama Barang',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(400,$VAlignCellStyle)->addText('Vol',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(null,$VAlignCellStyle)->addText('Satuan',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
 $table->addCell(null,$VAlignCellStyle)->addText('Harga Dasar',$TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
@@ -71,23 +79,23 @@ for ($i = 0; $i < $_POST['banyak_barang']; $i++) {
         $namaBarang->addText("\nspesifikasi : ".$spesifikasi[$i], $spekFontStyle,array('spaceAfter' => 0));
     $table->addCell(400)->addText($volume[$i], $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
     $table->addCell(null)->addText($satuan[$i], $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));
-    $table->addCell(null)->addText($pengaturan->formatUang($harga_dasar_penawaran[$i]), $fontStyle, array('spaceAfter' => 0, 'align' => 'right'));
-    $table->addCell(null)->addText($pengaturan->formatUang($total_harga_penawaran[$i]), $fontStyle, array('spaceAfter' => 0, 'align' => 'right'));
+    $table->addCell(null)->addText($pengaturan->formatUang($harga_dasar_hps[$i]), $fontStyle, array('spaceAfter' => 0, 'align' => 'right'));
+    $table->addCell(null)->addText($pengaturan->formatUang($total_harga_hps[$i]), $fontStyle, array('spaceAfter' => 0, 'align' => 'right'));
 
 }
-$total_penawaran=0;
+$total_hps=0;
 for($i=0;$i<$_POST['banyak_barang'];$i++){
-	$total_penawaran += $total_harga_penawaran[$i];
+	$total_hps += $total_harga_hps[$i];
 }    
 $table->addRow();
 $table->addCell(null,array('gridSpan' => 5))->addText("Total", $TfontStyle, array('spaceAfter' => 0, 'align' => 'right'));
-$table->addCell(null)->addText("Rp.".$pengaturan->formatUang($total_penawaran), $fontStyle, array('spaceAfter' => 0, 'align' => 'right'));
+$table->addCell(null)->addText("Rp.".$pengaturan->formatUang($total_hps), $fontStyle, array('spaceAfter' => 0, 'align' => 'right'));
 
 //end tabel
 
 $section->addText("");
 
-$pisahin = "Terbilang : (".$pengaturan->penyebut($total_penawaran)."Rupiah)";
+$pisahin = "Terbilang : (".$pengaturan->penyebut($total_hps)."Rupiah )";
 $textRun = $section->createTextRun($isiParagrafStyle2);
 $pisah = explode(" ", $pisahin);
 for($i=0;$i<count($pisah);$i++){

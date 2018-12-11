@@ -46,6 +46,7 @@ $waktu_uknh = $_POST['waktu_uknh'];
 $nomor_baknh = $_POST['nomor_baknh'];
 $tanggal_baknh = $_POST['tanggal_baknh'];
 $nomor_bahpl = $_POST['nomor_bahpl'];
+$tanggal_bahpl = $_POST['tanggal_bahpl'];
 $nomor_pp = $_POST['nomor_pp'];
 $tanggal_pp = $_POST['tanggal_pp'];
 $tanggal_spk_pp = $_POST['tanggal_spk_pp'];

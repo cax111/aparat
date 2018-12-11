@@ -1,7 +1,7 @@
 <?php
 // New portrait section
 $section = $phpWord->addSection(
-    array('paperSize' => 'Folio', 'marginLeft' => 710, 'marginRight' => 710, 'marginTop' =>3120, 'marginBottom' => 710)
+    array('paperSize' => 'Folio', 'marginLeft' => 1000, 'marginRight' => 1000, 'marginTop' =>3120, 'marginBottom' => 710)
 );
 //set font
 $boldFontStyleName = 'BoldTextBAHPL'; //bold
@@ -45,7 +45,15 @@ $spekFontStyle = array('bold'=>true, 'size'=>8, 'name' => 'Times New Roman');
 $phpWord->addTableStyle($fancyTableStyleName, $fancyTableStyle, $fancyTableFirstRowStyle);
 $table = $section->addTable($fancyTableStyleName);
 $table->addRow();
-$table->addCell(3700,$VMergeStart)->addText("JURUSAN ".strtoupper($nama_jurusan)."\nFAKULTAS ".strtoupper($nama_fakultas)."\n".strtoupper($nama_universitas)."\n\nBANDUNG", $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+if($nama_fakultas=="lain-lain"){
+$jurus = $table->addCell(3700,$VMergeStart);
+$jurus->addText(strtoupper($nama_jurusan)."\n".strtoupper($nama_universitas), $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+$jurus->addText("BANDUNG", $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+}else{
+$jurus = $table->addCell(3700,$VMergeStart);
+$jurus->addText("JURUSAN ".strtoupper($nama_jurusan)."\nFAKULTAS ".strtoupper($nama_fakultas)."\n".strtoupper($nama_universitas), $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+$jurus->addText("BANDUNG", $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));
+}
 $table->addCell(null, $VAlignCellStyle)->addText('BERITA ACARA PENGUMUMAN PENYEDIA', $TfontStyle,array('spaceAfter' => 0, 'align' => 'center'));   
 $table->addRow();
 $table->addCell(null,$VMergeContinue)->addText("", $fontStyle, array('spaceAfter' => 0, 'align' => 'center'));

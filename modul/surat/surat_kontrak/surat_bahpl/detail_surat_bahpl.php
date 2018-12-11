@@ -23,6 +23,10 @@
                     <th>Nomor Surat</th>
                     <td><?=": ".$t['nomor_bahpl']; ?></td>
                   </tr>
+                  <tr>
+                    <th>Tanggal Surat</th>
+                    <td><?=": ".$pengaturan->formatTanggal($t['tanggal_bahpl']); ?></td>
+                  </tr>
                   </tbody>
                 </table>
               </div>

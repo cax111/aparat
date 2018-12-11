@@ -11,6 +11,8 @@
               
       <h5>Nomor Surat</h5>
       <input class="form-control" type="text" name="nomor" value="<?=$t['nomor_bahpl']?>" required="required" >
+      <h5>Tanggal Surat</h5>
+      <input class="form-control" type="date" name="tanggal" value="<?=$t['tanggal_bahpl']?>" required="required" >
       <br/>
 <?php
   }
@@ -24,7 +26,7 @@
     </div> 
     <?php
       if(isset($_POST['ok'])){
-        $status = $surat_bahpl->insertBAHPL($_POST['nomor'],$_GET['id']);      
+        $status = $surat_bahpl->insertBAHPL($_POST['nomor'],$_POST['tanggal'],$_GET['id']);      
         if($status=="Input Data Gagal."){
     ?>
           <div class="box-footer clearfix label-danger">

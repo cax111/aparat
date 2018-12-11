@@ -119,7 +119,7 @@ $(document).ready(function(){
             var jumlah = ppn2 + harga_temp;
             var keuntungan = jumlah * 0.1;
             var hps = keuntungan+jumlah;
-            var total = hps * vol;
+            var total = (hps * vol)* 0.1;
 
              // var a_vol = vol.toFixed(0);
              // var a_ppn2 = ppn2.toFixed(0);
@@ -128,8 +128,8 @@ $(document).ready(function(){
             document.getElementById("ppn").value = ppn2.toFixed(0);
             document.getElementById("jumlah").value = jumlah.toFixed(0);
             document.getElementById("keuntungan").value = keuntungan.toFixed(0);
-            document.getElementById("hps").value = hps.toFixed(0);
-            document.getElementById("total").value = total.toFixed(0);
+            document.getElementById("hps").value = hps;
+            document.getElementById("total").value = total;
 
 
         }else if (document.getElementById('ppnt').checked) {
@@ -140,7 +140,7 @@ $(document).ready(function(){
             var jumlah = ppn + harga_dasar;
             var keuntungan = jumlah*0.1;
             var hps=keuntungan+jumlah;
-            var total=hps*vol;
+            var total=hps.toFixed(0)*vol;
 
             document.getElementById("banyak_barang").value = vol.toFixed(0);
             document.getElementById("harga_dasar_barang").value = harga_dasar.toFixed(0);
@@ -148,7 +148,7 @@ $(document).ready(function(){
             document.getElementById("jumlah").value = jumlah.toFixed(0);
             document.getElementById("keuntungan").value = keuntungan.toFixed(0);
             document.getElementById("hps").value = hps.toFixed(0);
-            document.getElementById("total").value = total.toFixed(0);
+            document.getElementById("total").value = total;
         }
     }
 
